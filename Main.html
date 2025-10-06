@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZoom Rental</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="header-inner">
+        <a class="logo" href="#top">AZoom Rental</a>
+
+        <!-- Centered nav -->
+        <nav id="primary-nav" class="nav-menu" aria-label="Primary">
+          <a href="#top" class="active">Home</a>
+          <a href="#popular">Cars</a>
+          <a href="#howto">How it works</a>
+          <a href="#reviews">Reviews</a>
+        </nav>
+
+        <!-- Mobile menu toggle -->
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="primary-nav"
+          aria-label="Open menu"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="login">
+          <a href="#" class="btn-primary small">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO: text left, image right -->
+      <section class="hero" aria-label="Hero">
+        <div class="hero-copy">
+          <h1>Rent the right car, right now</h1>
+          <p>Fast. Affordable. Anywhere in the city.</p>
+
+          <div class="hero-actions">
+            <button
+              class="btn-primary"
+              data-scroll-to="#popular"
+              aria-label="Reserve now"
+            >
+              Reserve
+            </button>
+            <p class="hint">Click reserve to start your booking</p>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <!-- decorative, managed by CSS/JS background -->
+          <div class="hero-overlay" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- POPULAR CARS -->
+      <section id="popular" class="popular" aria-labelledby="popular-heading">
+        <div class="section-bar">
+          <h2 id="popular-heading">
+            List of cars <span class="muted">popular cars</span>
+          </h2>
+          <a class="btn-ghost" href="#all-cars" aria-label="View more cars"
+            >View more</a
+          >
+        </div>
+
+        <div class="card-row">
+          <article class="car-card">
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan on a street"
+            />
+            <div class="card-body">
+              <div>
+                <h3>Sleek Sedan</h3>
+                <p class="meta">
+                  <span class="tag">Sedan</span>
+                  <span class="rating" aria-label="4.8 out of 5">★ 4.8</span>
+                </p>
+                <p class="price">$58/day</p>
+              </div>
+              <button class="btn-link reserve-card" data-car="Sleek Sedan">
+                Reserve
+              </button>
+            </div>
+          </article>
+
+          <article class="car-card">
+            <img
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop"
+              alt="Grey SUV parked by trees"
+            />
+            <div class="card-body">
+              <div>
+                <h3>Urban SUV</h3>
+                <p class="meta">
+                  <span class="tag">SUV</span>
+                  <span class="rating" aria-label="4.7 out of 5">★ 4.7</span>
+                </p>
+                <p class="price">$72/day</p>
+              </div>
+              <button class="btn-link reserve-card" data-car="Urban SUV">
+                Reserve
+              </button>
+            </div>
+          </article>
+
+          <article class="car-card">
+            <img
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+              alt="Blue hatchback in city"
+            />
+            <div class="card-body">
+              <div>
+                <h3>City Hatch</h3>
+                <p class="meta">
+                  <span class="tag">Hatch</span>
+                  <span class="rating" aria-label="4.6 out of 5">★ 4.6</span>
+                </p>
+                <p class="price">$49/day</p>
+              </div>
+              <button class="btn-link reserve-card" data-car="City Hatch">
+                Reserve
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- HOW TO USE -->
+      <section id="howto" class="howto" aria-labelledby="howto-heading">
+        <h2 id="howto-heading">How to use the app</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="icon" aria-hidden="true">🚗</div>
+            <h3>Choose</h3>
+            <p>Pick a car that fits your trip.</p>
+          </div>
+          <div class="step">
+            <div class="icon" aria-hidden="true">📅</div>
+            <h3>Schedule</h3>
+            <p>Select dates and pickup point.</p>
+          </div>
+          <div class="step">
+            <div class="icon" aria-hidden="true">💳</div>
+            <h3>Reserve</h3>
+            <p>Confirm and you’re good to go.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEWS -->
+      <section id="reviews" class="reviews" aria-labelledby="reviews-heading">
+        <h2 id="reviews-heading">Reviews</h2>
+        <div class="review-row">
+          <figure class="review">
+            <blockquote>
+              “Booking took under five minutes and the car was spotless.”
+            </blockquote>
+            <figcaption>— Jamie L.</figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>
+              “Great rates and pickup near my office. Will use again.”
+            </blockquote>
+            <figcaption>— Priya S.</figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote>
+              “Customer support was fast when I changed my time.”
+            </blockquote>
+            <figcaption>— Wei Ming</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <h4>Contact Us</h4>
+          <p>hello@azoom.example<br />+65 6000 0000</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <p>
+            <a href="#popular">Cars</a> · <a href="#howto">How it works</a> ·
+            <a href="#reviews">Reviews</a>
+          </p>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
+        </div>
+      </div>
+      <div class="sitemap">
+        <a href="#popular">Reserve</a> | <a href="#">Rates</a> |
+        <a href="#">FAQ</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
