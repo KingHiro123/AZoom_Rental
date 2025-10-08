@@ -14,63 +14,170 @@
 
   <body>
     <!-- HEADER -->
-    <header class="site-header" id="top">
-      <div class="header-inner">
-        <a class="logo" href="/Main.html">AZoom Rental</a>
+    <header class="header" id="top">
+      <div class="header-wrap">
+        <a class="logo" href="/index.html">AZoom Rental</a>
 
-        <nav id="primary-nav" class="nav-menu" aria-label="Primary">
-          <a href="/Main.html" class="active">Home</a>
-          <a href="/carList.html">Cars</a>
-          <a href="#howto">How it works</a>
-          <a href="#reviews">Reviews</a>
+        <nav id="main-nav" class="nav" aria-label="Primary">
+          <a href="/carList.html" class="active">Cars</a>
+          <a href="/rates.html">Rates</a>
+          <a href="/location.html">Locations</a>
+          <a href="/faq.html">FAQ</a>
         </nav>
 
-        <button class="menu-toggle" aria-label="Open menu">
+        <button class="menu" aria-label="Open menu">
           <i class="fas fa-bars"></i>
         </button>
 
-        <nav class="login">
-          <a href="#" class="btn-primary small">Login</a>
-        </nav>
+        <div class="login">
+          <a href="#" class="btn small">Login</a>
+        </div>
       </div>
     </header>
+
     <!-- MAIN -->
-    <main>
-      <!-- CAR LIST 
-        What i plan to do here:
-            - List all cars available for rent
-            - Each car should have an image, name, type, price per day, and a "Rent Now" button
-            - Should have a filter option to filter cars by type (e.g., SUV, Sedan, etc.)
-            - Thinking of whether i should have it on the side or as a dropdown list
-            - Thinking of whether I want to add a search bar
-            - Will only have a few cars, to show the layout 
-            - Must be corresponding with the image of the website
-            - STILL NEED TO DECIDE WHAT MY BRANDING IS 
-        
-        -->
+    <main class="list">
+      <!-- top bar: title + search -->
+      <div class="list-head">
+        <h1>Our Vehicles</h1>
+
+        <form
+          class="search"
+          role="search"
+          aria-label="Search cars"
+          onsubmit="return false;"
+        >
+          <input
+            type="search"
+            name="q"
+            placeholder="Search make, model, or type…"
+            aria-label="Search make, model, or type"
+          />
+          <button class="btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <span class="sr">Search</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- body: filters (left) + grid (right) -->
+      <div class="list-body">
+        <!-- FILTERS -->
+        <aside class="filters" aria-label="Filters">
+          <div class="filter-group">
+            <h3>Type</h3>
+            <label><input type="checkbox" /> Sedan</label>
+            <label><input type="checkbox" /> SUV</label>
+            <label><input type="checkbox" /> Hatchback</label>
+            <label><input type="checkbox" /> MPV</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Transmission</h3>
+            <label><input type="checkbox" /> Automatic</label>
+            <label><input type="checkbox" /> Manual</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Fuel</h3>
+            <label><input type="checkbox" /> Petrol</label>
+            <label><input type="checkbox" /> Hybrid</label>
+            <label><input type="checkbox" /> Electric</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Price / day</h3>
+            <label><input type="checkbox" /> &lt; $50</label>
+            <label><input type="checkbox" /> $50–$70</label>
+            <label><input type="checkbox" /> $70–$100</label>
+            <label><input type="checkbox" /> $100+</label>
+          </div>
+
+          <button class="btn filter-apply" type="button">Apply</button>
+        </aside>
+
+        <!-- CARS GRID -->
+        <section class="cards" aria-label="Cars">
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan"
+            />
+            <div class="card-body">
+              <div>
+                <h3>Sleek Sedan</h3>
+                <p class="meta">
+                  <span class="tag">Sedan</span>
+                  <span class="rating">★ 4.8</span>
+                </p>
+                <p class="price">$58/day</p>
+              </div>
+              <a class="link-btn" href="/reserve.html">Rent Now</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop"
+              alt="Grey SUV"
+            />
+            <div class="card-body">
+              <div>
+                <h3>Urban SUV</h3>
+                <p class="meta">
+                  <span class="tag">SUV</span> <span class="rating">★ 4.7</span>
+                </p>
+                <p class="price">$72/day</p>
+              </div>
+              <a class="link-btn" href="/reserve.html">Rent Now</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+              alt="Blue hatchback"
+            />
+            <div class="card-body">
+              <div>
+                <h3>City Hatch</h3>
+                <p class="meta">
+                  <span class="tag">Hatch</span>
+                  <span class="rating">★ 4.6</span>
+                </p>
+                <p class="price">$49/day</p>
+              </div>
+              <a class="link-btn" href="/reserve.html">Rent Now</a>
+            </div>
+          </article>
+
+          <!-- add more cards as needed -->
+        </section>
+      </div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="footer">
       <div class="footer-grid">
         <div>
-          <h4>Contact Us</h4>
+          <h4>Contact</h4>
           <p>hello@azoom.example<br />+65 6000 0000</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4>Links</h4>
           <p>
-            <a href="#popular">Cars</a> · <a href="#howto">How it works</a> ·
-            <a href="#reviews">Reviews</a>
+            <a href="/carList.html">Cars</a> ·
+            <a href="/index.html#howto">How it works</a> ·
+            <a href="/index.html#reviews">Reviews</a>
           </p>
         </div>
         <div>
-          <h4>Follow Us</h4>
+          <h4>Follow</h4>
           <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
         </div>
       </div>
-      <div class="sitemap">
-        <a href="#popular">Reserve</a> | <a href="#">Rates</a> |
+      <div class="map">
+        <a href="/index.html#cars">Reserve</a> | <a href="#">Rates</a> |
         <a href="#">FAQ</a>
       </div>
     </footer>

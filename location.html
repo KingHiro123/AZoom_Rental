@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZoom Rental – Locations</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header" id="top">
+      <div class="header-wrap">
+        <a class="logo" href="/index.html">AZoom Rental</a>
+        <nav id="main-nav" class="nav" aria-label="Primary">
+          <a href="/carList.html">Cars</a>
+          <a href="/rates.html">Rates</a>
+          <a href="/location.html" class="active">Locations</a>
+          <a href="/faq.html">FAQ</a>
+        </nav>
+        <button class="menu" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="login"><a href="#" class="btn small">Login</a></div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="content">
+        <h1>Where to Find Us</h1>
+        <p>
+          Headquarters, pickup spots, and return points. Choose what’s closest
+          to you.
+        </p>
+
+        <div class="grid-3">
+          <div class="loc-card">
+            <h3>Headquarters</h3>
+            <p>123 Marina Blvd, #04-01</p>
+            <div class="map-embed">
+              <!-- Replace q= with your real address -->
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Marina%20Bay%20Sands&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">Mon–Fri: 9am–6pm · +65 6000 0000</p>
+          </div>
+
+          <div class="loc-card">
+            <h3>Pickup – Downtown</h3>
+            <p>45 Clarke St, Carpark B</p>
+            <div class="map-embed">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Clarke%20Quay&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">Open daily: 8am–10pm</p>
+          </div>
+
+          <div class="loc-card">
+            <h3>Return – Airport</h3>
+            <p>Changi Airport T1 Car Rental Bay</p>
+            <div class="map-embed">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Changi%20Airport%20Terminal%201&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">24/7 returns available</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h4>Contact</h4>
+          <p>hello@azoom.example<br />+65 6000 0000</p>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <p>
+            <a href="/carList.html">Cars</a> · <a href="/rates.html">Rates</a> ·
+            <a href="/faq.html">FAQ</a>
+          </p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
+        </div>
+      </div>
+      <div class="map">
+        <a href="/index.html#cars">Reserve</a> |
+        <a href="/rates.html">Rates</a> | <a href="/faq.html">FAQ</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

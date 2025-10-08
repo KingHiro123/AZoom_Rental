@@ -14,24 +14,27 @@
 
   <body>
     <!-- HEADER -->
-    <header class="site-header" id="top">
-      <div class="header-inner">
+    <header class="header" id="top">
+      <div class="header-wrap">
         <a class="logo" href="/index.html">AZoom Rental</a>
 
-        <nav id="primary-nav" class="nav-menu" aria-label="Primary">
-          <a href="/index.html" class="active">Home</a>
+        <!-- main nav -->
+        <nav id="main-nav" class="nav" aria-label="Primary">
           <a href="/carList.html">Cars</a>
-          <a href="#howto">How it works</a>
-          <a href="#reviews">Reviews</a>
+          <a href="/rates.html">Rates</a>
+          <a href="/location.html">Locations</a>
+          <a href="/faq.html">FAQ</a>
         </nav>
 
-        <button class="menu-toggle" aria-label="Open menu">
+        <!-- hamburger -->
+        <button class="menu" aria-label="Open menu">
           <i class="fas fa-bars"></i>
         </button>
 
-        <nav class="login">
-          <a href="#" class="btn-primary small">Login</a>
-        </nav>
+        <!-- login -->
+        <div class="login">
+          <a href="#" class="btn small">Login</a>
+        </div>
       </div>
     </header>
 
@@ -44,27 +47,26 @@
           <p>Fast. Affordable. Anywhere in the city.</p>
 
           <div class="hero-actions">
-            <a href="/reserve.html">
-              <button class="btn-primary">Reserve</button></a
-            >
+            <a href="/reserve.html"><button class="btn">Reserve</button></a>
             <p class="hint">Click reserve to start your booking</p>
           </div>
         </div>
-        <div class="hero-image">
+
+        <div class="hero-img">
           <div class="hero-overlay" aria-hidden="true"></div>
         </div>
       </section>
 
-      <!-- POPULAR CARS -->
-      <section id="popular" class="popular">
-        <div class="section-bar">
+      <!-- CARS -->
+      <section id="cars" class="cars">
+        <div class="section-head">
           <h2>Our cars</h2>
-          <a class="btn-ghost" href="/carList.html">View more</a>
+          <a class="btn btn-ghost" href="/carList.html">View more</a>
         </div>
 
-        <div class="card-row">
-          <!-- Card 1 -->
-          <article class="car-card">
+        <div class="cards">
+          <!-- card 1 -->
+          <article class="card">
             <img
               src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
               alt="Black sedan on a street"
@@ -78,12 +80,14 @@
                 </p>
                 <p class="price">$58/day</p>
               </div>
-              <button class="btn-link">Reserve</button>
+              <a href="/reserve.html"
+                ><button class="link-btn">Reserve</button></a
+              >
             </div>
           </article>
 
-          <!-- Card 2 -->
-          <article class="car-card">
+          <!-- card 2 -->
+          <article class="card">
             <img
               src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop"
               alt="Grey SUV parked by trees"
@@ -96,12 +100,14 @@
                 </p>
                 <p class="price">$72/day</p>
               </div>
-              <button class="btn-link">Reserve</button>
+              <a href="/reserve.html"
+                ><button class="link-btn">Reserve</button></a
+              >
             </div>
           </article>
 
-          <!-- Card 3 -->
-          <article class="car-card">
+          <!-- card 3 -->
+          <article class="card">
             <img
               src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
               alt="Blue hatchback in city"
@@ -115,16 +121,18 @@
                 </p>
                 <p class="price">$49/day</p>
               </div>
-              <button class="btn-link">Reserve</button>
+              <a href="/reserve.html"
+                ><button class="link-btn">Reserve</button></a
+              >
             </div>
           </article>
         </div>
       </section>
 
       <!-- HOW TO -->
-      <section id="howto" class="howto">
+      <section id="howto" class="steps">
         <h2>How to use the app</h2>
-        <div class="steps">
+        <div class="steps-grid">
           <div class="step">
             <div class="icon">🚗</div>
             <h3>Choose</h3>
@@ -146,7 +154,7 @@
       <!-- REVIEWS -->
       <section id="reviews" class="reviews">
         <h2>Reviews</h2>
-        <div class="review-row">
+        <div class="reviews-grid">
           <figure class="review">
             <blockquote>
               “Booking took under five minutes and the car was spotless.”
@@ -170,26 +178,26 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
+    <footer class="footer">
       <div class="footer-grid">
         <div>
-          <h4>Contact Us</h4>
+          <h4>Contact</h4>
           <p>hello@azoom.example<br />+65 6000 0000</p>
         </div>
         <div>
-          <h4>Quick Links</h4>
+          <h4>Links</h4>
           <p>
-            <a href="#popular">Cars</a> · <a href="#howto">How it works</a> ·
+            <a href="#cars">Cars</a> · <a href="#howto">How it works</a> ·
             <a href="#reviews">Reviews</a>
           </p>
         </div>
         <div>
-          <h4>Follow Us</h4>
+          <h4>Follow</h4>
           <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
         </div>
       </div>
-      <div class="sitemap">
-        <a href="#popular">Reserve</a> | <a href="#">Rates</a> |
+      <div class="map">
+        <a href="#cars">Reserve</a> | <a href="#">Rates</a> |
         <a href="#">FAQ</a>
       </div>
     </footer>
