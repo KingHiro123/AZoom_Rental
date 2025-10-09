@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AZoom Rental - Reserve</title>
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -13,7 +13,6 @@
   </head>
 
   <body>
-    <!-- HEADER -->
     <header class="header" id="top">
       <div class="header-wrap">
         <a class="logo" href="/index.html">AZoom Rental</a>
@@ -35,7 +34,228 @@
       </div>
     </header>
 
-    <!-- MAIN -->
+    <main class="page">
+      <section class="content">
+        <div class="reserve-head">
+          <h1>Reserve a Car</h1>
+          <p class="mini">
+            Pick your locations, dates, and extras. You’ll see a live price
+            estimate on the right.
+          </p>
+        </div>
+
+        <div class="reserve-wrap">
+          <!-- FORM -->
+          <form
+            class="form form-card"
+            action="#"
+            method="post"
+            id="reserveForm"
+          >
+            <!-- Locations -->
+            <div class="form-group">
+              <h2 class="group-title">Locations</h2>
+              <div class="grid-2">
+                <label
+                  >Pickup location
+                  <input
+                    type="text"
+                    name="pickup"
+                    placeholder="Downtown HQ"
+                    required
+                  />
+                </label>
+                <label
+                  >Return location
+                  <input
+                    type="text"
+                    name="dropoff"
+                    placeholder="Same as pickup"
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+
+            <!-- Dates -->
+            <div class="form-group">
+              <h2 class="group-title">Dates</h2>
+              <div class="grid-2">
+                <label
+                  >Pickup date & time
+                  <input
+                    type="datetime-local"
+                    name="start"
+                    id="start"
+                    required
+                  />
+                </label>
+                <label
+                  >Return date & time
+                  <input type="datetime-local" name="end" id="end" required />
+                </label>
+              </div>
+            </div>
+
+            <!-- Vehicle -->
+            <div class="form-group">
+              <h2 class="group-title">Vehicle</h2>
+              <div class="grid-2">
+                <label
+                  >Car type
+                  <select name="type" id="carType" required>
+                    <option value="Hatch" data-rate="49">
+                      Hatch — from $49/day
+                    </option>
+                    <option value="Sedan" data-rate="58" selected>
+                      Sedan — from $58/day
+                    </option>
+                    <option value="SUV" data-rate="72">
+                      SUV — from $72/day
+                    </option>
+                    <option value="MPV" data-rate="85">
+                      MPV — from $85/day
+                    </option>
+                  </select>
+                </label>
+                <label
+                  >Passengers
+                  <select name="seats">
+                    <option>1–2</option>
+                    <option selected>3–4</option>
+                    <option>5–7</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <!-- Extras -->
+            <div class="form-group">
+              <h2 class="group-title">Extras</h2>
+              <div class="checks">
+                <label
+                  ><input type="checkbox" name="gps" data-extra="5" /> GPS
+                  ($5/day)</label
+                >
+                <label
+                  ><input type="checkbox" name="child" data-extra="6" /> Child
+                  seat ($6/day)</label
+                >
+                <label
+                  ><input type="checkbox" name="driver" data-extra="8" />
+                  Additional driver ($8/day)</label
+                >
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <label
+              >Notes
+              <textarea
+                name="notes"
+                rows="4"
+                placeholder="Anything we should know?"
+              ></textarea>
+            </label>
+
+            <button class="btn" type="submit">Confirm Reservation</button>
+          </form>
+
+          <!-- SUMMARY -->
+          <aside class="summary">
+            <div class="summary-card">
+              <h3>Estimate</h3>
+              <div class="summary-row">
+                <span>Car type</span><strong id="sumType">Sedan</strong>
+              </div>
+              <div class="summary-row">
+                <span>Daily rate</span><strong id="sumRate">$58</strong>
+              </div>
+              <div class="summary-row">
+                <span>Duration</span><strong id="sumDays">1 day</strong>
+              </div>
+              <div class="summary-row">
+                <span>Extras</span><strong id="sumExtras">$0</strong>
+              </div>
+              <hr />
+              <div class="summary-total">
+                <span>Total</span><strong id="sumTotal">$58</strong>
+              </div>
+              <p class="mini">
+                Tax included. Final price may vary at counter if details change.
+              </p>
+              <a class="btn w-full" href="/rates.html">See full rate details</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h4>Contact</h4>
+          <p>hello@azoom.example<br />+65 6000 0000</p>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <p>
+            <a href="/carList.html">Cars</a> ·
+            <a href="#howto">How it works</a> ·
+            <a href="#reviews">Reviews</a>
+          </p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
+        </div>
+      </div>
+      <div class="map">
+        <a href="/carList.html">Reserve</a> | <a href="#">Rates</a> |
+        <a href="#">FAQ</a>
+      </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AZoom Rental - Reserve</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header class="header" id="top">
+      <div class="header-wrap">
+        <a class="logo" href="/index.html">AZoom Rental</a>
+
+        <nav id="main-nav" class="nav" aria-label="Primary">
+          <a href="/carList.html">Cars</a>
+          <a href="/rates.html">Rates</a>
+          <a href="/location.html">Locations</a>
+          <a href="/faq.html">FAQ</a>
+        </nav>
+
+        <button class="menu" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="login">
+          <a href="#" class="btn small">Login</a>
+        </div>
+      </div>
+    </header>
+
     <main class="page">
       <section class="content">
         <h1>Reserve a Car</h1>
@@ -106,7 +326,6 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-grid">
         <div>
@@ -132,6 +351,6 @@
       </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
-</html>
+</html> -->
