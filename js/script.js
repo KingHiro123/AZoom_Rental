@@ -6,8 +6,8 @@ window.addEventListener("scroll", () => {
 });
 
 // Mobile menu toggle
-const toggle = document.querySelector(".menu-toggle");
-const nav = document.querySelector("#primary-nav");
+const toggle = document.querySelector(".menu");
+const nav = document.querySelector("#main-nav");
 
 toggle.addEventListener("click", () => {
   const open = nav.classList.toggle("open");

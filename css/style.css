@@ -397,43 +397,15 @@ body {
 }
 
 /* ===== rates page ===== */
-.rate-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
+.rate-header h1 {
+  display: flex;
+  justify-content: center;
 }
 
-.rate-card {
-  background: var(--surface);
-  padding: 1rem;
-  border-radius: 10px;
-  text-align: center;
+.rate-header p {
+  display: flex;
+  justify-content: center;
 }
-
-.rate-card h3 {
-  margin-top: 0;
-}
-
-.price-lg {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0.25rem 0 0.75rem;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-.table th,
-.table td {
-  padding: 0.6rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: left;
-}
-
 /* ===== rates page ===== */
 /* .rates-head {
   display: flex;
