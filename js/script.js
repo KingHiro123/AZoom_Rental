@@ -1,9 +1,9 @@
 // Add shadow when scrolling
-const header = document.querySelector(".site-header");
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 4) header.classList.add("scrolled");
-  else header.classList.remove("scrolled");
-});
+// const header = document.querySelector(".site-header");
+// window.addEventListener("scroll", () => {
+//   if (window.scrollY > 4) header.classList.add("scrolled");
+//   else header.classList.remove("scrolled");
+// });
 
 // Mobile menu toggle
 const toggle = document.querySelector(".menu");
@@ -96,3 +96,30 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   );
   update();
 })();
+
+// under rates.html
+// Rates segmented toggle
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".seg-btn");
+  if (!btn) return;
+
+  const view = btn.dataset.view; // 'hourly' or 'fullday'
+  // toggle button UI
+  document.querySelectorAll(".seg-btn").forEach((b) => {
+    b.classList.toggle("active", b === btn);
+    b.setAttribute("aria-selected", b === btn ? "true" : "false");
+  });
+
+  // show/hide cards
+  document.querySelectorAll(".rates-grid .rate-card").forEach((card) => {
+    const isMatch = card.getAttribute("data-segment") === view;
+    card.hidden = !isMatch;
+  });
+});
+
+// On load: show hourly set (hide full-day)
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll('.rates-grid .rate-card[data-segment="fullday"]')
+    .forEach((c) => (c.hidden = true));
+});

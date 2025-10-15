@@ -29,40 +29,205 @@
       </div>
     </header>
 
-    <!-- MAIN -->
     <main>
-      <section class="content">
-        <div class="rate-header">
-          <h1>Rates</h1>
-          <p class="mini">
-            Transparent daily pricing. Insurance &amp; taxes included unless
-            noted.
-          </p>
-        </div>
-        <div class="rate-body">
-          <!-- This is where the thing will show daily/monthly yes -->
-          <div class="rates">
-            <!-- Able to click on buttons to show different pricings (daily prices vs full prices)-->
-            Hourly/Daily
-          </div>
+      <!-- HERO / INTRO -->
+      <section class="rates-hero container">
+        <h1 class="xl">Our rates</h1>
+        <p class="lead">
+          Only pay for the hours and mileage you use. We cover insurance,
+          maintenance, charging, and fuel.
+        </p>
 
-          <div class="car-rates-diesel">
-            <!-- Will show different cars (Only petrol and diesel for now, will think of putting hybrids when finished with this)
-                     - Need to show carousel with different type of car pricings (both daily and full)
-                        - Things to show in this: off peak, peak, normal prices per hr and mileage charge per km (can be any amt ngl)
-                     - When clicking on "Check out models", will bring to Car tab and filter will automate to show user different cars-->
-            Car 1, Car 2, Car 3
+        <!-- SEGMENTED TOGGLE -->
+        <div class="rates-toggle">
+          <div class="segmented" role="tablist" aria-label="Rate type">
+            <button
+              class="seg-btn active"
+              role="tab"
+              aria-selected="true"
+              data-view="hourly"
+            >
+              Hourly
+            </button>
+            <button
+              class="seg-btn"
+              role="tab"
+              aria-selected="false"
+              data-view="fullday"
+            >
+              Full-day
+            </button>
           </div>
-          <div class="car-rates-electric">
-            <!-- Will show electric cars (still contemplating whether i want this or not but for now, will keep it in) 
-                     - When clicking on "Check out models", will bring to Car tab and filter will automate to show user different cars-->
-            Car 1, Car 2, Car 3
+          <div class="save-note">
+            <span class="curve" aria-hidden="true"></span>
+            Save up to 33%!
           </div>
         </div>
       </section>
 
-      <!-- Anything added after this will only be thought of AFTER i completed this part cos i deemed it important for me to complete -->
+      <!-- PRICE CARDS -->
+      <section class="rates-grid container" aria-live="polite">
+        <!-- Economy -->
+        <article class="rate-card" data-segment="hourly">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Toyota_Vios_2023.jpg"
+            alt="Toyota Vios"
+            class="car-hero"
+          />
+          <h3>Economy</h3>
+
+          <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+            <div class="row"><span>Off-peak</span><strong>$3 / hr</strong></div>
+            <div class="row"><span>Normal</span><strong>$5 / hr</strong></div>
+            <div class="row"><span>Peak</span><strong>$9 / hr</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=economy" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+
+        <article class="rate-card" data-segment="fullday" hidden>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Toyota_Vios_2023.jpg"
+            alt="Toyota Vios"
+            class="car-hero"
+          />
+          <h3>Economy</h3>
+
+          <div class="rows">
+            <div class="row">
+              <span>Full-day (24h)</span><strong>$68 / day</strong>
+            </div>
+            <div class="row"><span>Deposit</span><strong>$0</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=economy" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+
+        <!-- Standard -->
+        <article class="rate-card" data-segment="hourly">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
+            alt="Mazda 3 Sedan"
+            class="car-hero"
+          />
+          <h3>Standard</h3>
+
+          <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+            <div class="row"><span>Off-peak</span><strong>$3 / hr</strong></div>
+            <div class="row"><span>Normal</span><strong>$6 / hr</strong></div>
+            <div class="row"><span>Peak</span><strong>$10 / hr</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=standard" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+
+        <article class="rate-card" data-segment="fullday" hidden>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
+            alt="Mazda 3 Sedan"
+            class="car-hero"
+          />
+          <h3>Standard</h3>
+
+          <div class="rows">
+            <div class="row">
+              <span>Full-day (24h)</span><strong>$82 / day</strong>
+            </div>
+            <div class="row"><span>Deposit</span><strong>$0</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=standard" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+
+        <!-- Select -->
+        <article class="rate-card" data-segment="hourly">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/3/3b/2022_Hyundai_Avante_N_Line_front.jpg"
+            alt="Hyundai Avante N-Line"
+            class="car-hero"
+          />
+          <h3>Select</h3>
+
+          <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+            <div class="row"><span>Off-peak</span><strong>$4 / hr</strong></div>
+            <div class="row"><span>Normal</span><strong>$7 / hr</strong></div>
+            <div class="row"><span>Peak</span><strong>$11 / hr</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=select" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+
+        <article class="rate-card" data-segment="fullday" hidden>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/3/3b/2022_Hyundai_Avante_N_Line_front.jpg"
+            alt="Hyundai Avante N-Line"
+            class="car-hero"
+          />
+          <h3>Select</h3>
+
+          <div class="rows">
+            <div class="row">
+              <span>Full-day (24h)</span><strong>$96 / day</strong>
+            </div>
+            <div class="row"><span>Deposit</span><strong>$0</strong></div>
+          </div>
+
+          <div class="rows subtle">
+            <div class="row">
+              <span>Mileage charge</span><strong>$0.39 / km</strong>
+            </div>
+          </div>
+
+          <a href="/carList.html?filter=select" class="btn outline block"
+            >Explore vehicle models</a
+          >
+        </article>
+      </section>
     </main>
+
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-grid">

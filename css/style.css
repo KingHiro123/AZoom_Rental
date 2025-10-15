@@ -117,7 +117,7 @@ body {
   font-size: 0.95rem;
 }
 
-/* ========== HERO ========== */
+/* ========== About section  ========== */
 .hero {
   max-width: 1200px;
   margin: 1.25rem auto 0;
@@ -280,6 +280,7 @@ body {
   margin-top: 1rem;
 }
 
+/* Under carList.html*/
 /* ===== Car list layout ===== */
 .list {
   max-width: 1200px;
@@ -396,8 +397,9 @@ body {
   }
 }
 
+/* under rates.html */
 /* ===== rates page ===== */
-.rate-header h1 {
+/* .rate-header h1 {
   display: flex;
   justify-content: center;
 }
@@ -405,7 +407,153 @@ body {
 .rate-header p {
   display: flex;
   justify-content: center;
+} */
+
+/* Containers & type */
+.container {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: 3rem 1.25rem;
 }
+.xl {
+  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+  line-height: 1.1;
+  margin: 0;
+}
+.lead {
+  margin: 1rem 0 2rem;
+  font-size: 1.125rem;
+  color: var(--muted, #6b7280);
+}
+
+/* Hero */
+.rates-hero {
+  text-align: center;
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+}
+
+/* Segmented toggle */
+.rates-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+.segmented {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--surface, #0a2b4d);
+  border-radius: 999px;
+  padding: 0.25rem;
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.15));
+}
+.seg-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text, #fff);
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.seg-btn.active {
+  background: var(--brand, #ff7a1a);
+  color: #fff;
+}
+.save-note {
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--muted, #a9bed2);
+}
+.save-note .curve {
+  position: absolute;
+  left: -2.25rem;
+  top: -0.75rem;
+  width: 28px;
+  height: 28px;
+  border: 2px solid currentColor;
+  border-color: currentColor transparent transparent currentColor;
+  border-radius: 50% 0 0 0;
+  transform: rotate(-30deg);
+}
+
+/* Grid of cards */
+.rates-grid {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 4rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 960px) {
+  .rates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.rate-card {
+  background: var(--surface, #0a2b4d);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.2));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rate-card h3 {
+  margin: 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.car-hero {
+  width: 100%;
+  max-width: 320px;
+  margin: 0.25rem auto 0;
+  display: block;
+}
+
+/* Rows */
+.rows {
+  border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  padding-top: 0.5rem;
+}
+.rows.subtle {
+  opacity: 0.9;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.25rem;
+}
+.row span {
+  color: var(--muted, #a9bed2);
+}
+.row strong {
+  font-weight: 800;
+}
+
+/* Buttons */
+.btn.block {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+.btn.outline {
+  background: transparent;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
+  color: var(--text, #f2f4f8);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.btn.outline:hover {
+  border-color: var(--brand, #ff7a1a);
+  color: #fff;
+}
+
 /* ===== rates page ===== */
 /* .rates-head {
   display: flex;
@@ -539,135 +687,200 @@ body {
     margin-top: 0.25rem;
   }
 }  */
-
-/* ===== reserve form ===== */
-/* .form {
-  background: var(--surface);
-  padding: 1rem;
-  border-radius: 10px;
-  display: grid;
-  gap: 1rem;
+/* Reserve code */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+.xl {
+  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
+  margin: 0;
+}
+.lead {
+  color: var(--muted, #a9bed2);
+  margin: 0.5rem 0 1.5rem;
 }
 
-.form label {
-  font-weight: 600;
-  display: block;
-}
-
-.form input,
-.form select,
-.form textarea {
-  width: 100%;
-  margin-top: 0.3rem;
-  padding: 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
-}
-
-.checks {
+/* Stepper */
+.stepper {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 2rem;
+  color: var(--muted);
+}
+.stepper li {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+  border-radius: 999px;
+}
+.stepper li.active {
+  background: var(--brand, #ff7a1a);
+  color: #fff;
+  border-color: transparent;
 }
 
-.grid-2 {
+/* Layout */
+.reserve-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-@media (max-width: 720px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-} */
-
-/* ===== Reserve layout polish ===== */
-.reserve-head {
-  margin-bottom: 0.75rem;
-}
-.reserve-wrap {
-  display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1.35fr 0.65fr;
   gap: 1.25rem;
   align-items: start;
 }
-.form-card {
-  background: var(--surface);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 1rem;
-}
-.group-title {
-  margin: 0 0 0.35rem;
-  font-size: 1.05rem;
-}
-.form-group {
-  margin-bottom: 0.75rem;
+@media (max-width: 960px) {
+  .reserve-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.summary {
+.form-card,
+.summary-card {
+  background: var(--surface, #0a2b4d);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.2));
+  margin-bottom: 1rem;
+}
+
+/* Sticky summary */
+.summary-col {
   position: sticky;
   top: 84px;
 }
-.summary-card {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.03)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 1rem;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-  display: grid;
-  gap: 0.5rem;
-}
-.summary-card h3 {
-  margin: 0;
-}
-.summary-row,
-.summary-total {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.summary-total {
-  font-size: 1.2rem;
-  font-weight: 800;
-}
-.summary-card hr {
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  margin: 0.25rem 0;
-}
-.w-full {
-  width: 100%;
-}
-
-.form input,
-.form select,
-.form textarea {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-.form input:focus,
-.form select:focus,
-.form textarea:focus {
-  outline: 2px solid rgba(255, 122, 26, 0.4);
-  border-color: rgba(255, 122, 26, 0.6);
-}
-
 @media (max-width: 960px) {
-  .reserve-wrap {
-    grid-template-columns: 1fr;
-  }
-  .summary {
+  .summary-col {
     position: static;
   }
+}
+
+/* Fields */
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+.field > span {
+  font-weight: 600;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  background: transparent;
+  color: var(--text, #f2f4f8);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+@media (max-width: 640px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.mini {
+  font-size: 0.9rem;
+}
+.muted {
+  color: var(--muted, #a9bed2);
+}
+
+/* Segmented toggle (reuse from Rates page if you added it) */
+.segmented {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  background: var(--bg, #002b5b);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+.seg-btn {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.seg-btn.active {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Vehicle */
+.vehicle-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+.veh-img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.veh-name {
+  margin: 0;
+}
+.veh-tags {
+  margin: 0.25rem 0 0;
+}
+
+/* Checks & radios */
+.checks,
+.radios {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.check,
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.check em,
+.radio em {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+/* Summary */
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+.sum-row.total {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.btn.block {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 0.75rem;
+}
+.form-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.mini-link {
+  font-size: 0.9rem;
+  color: var(--text);
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* ===== faq ===== */
@@ -708,6 +921,75 @@ body {
   height: 220px;
   border: 0;
 }
+
+/* ========== login ========== */
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.login-card {
+  background: var(--surface, #0a2b4d);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.1));
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.25));
+  text-align: center;
+}
+
+.login-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field span {
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.15));
+  border-radius: 10px;
+  color: var(--text, #f2f4f8);
+  padding: 0.75rem 1rem;
+}
+
+.btn.block {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+  background: var(--brand, #ff7a1a);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn.block:hover {
+  background: var(--brand-dark, #e56f16);
+}
+
+.muted {
+  color: var(--muted, #a9bed2);
+}
+
+.mini {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 960px) {
   .hero {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="header" id="top">
+      <div class="header-wrap">
+        <a class="logo" href="/index.html">AZoom Rental</a>
+
+        <nav id="main-nav" class="nav" aria-label="Primary">
+          <a href="/carList.html">Cars</a>
+          <a href="/rates.html">Rates</a>
+          <a href="/location.html">Locations</a>
+          <a href="/faq.html">FAQ</a>
+        </nav>
+
+        <button class="menu" aria-label="Open menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="login"><a href="#" class="btn small">Login</a></div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <!-- MAIN -->
+    <main class="login-page container">
+      <!-- Save the username/password in local storage  -->
+
+      <section class="login-card">
+        <h1 class="xl">Login</h1>
+        <p class="lead">Access your AZoom account to manage bookings.</p>
+
+        <form id="loginForm" class="login-form">
+          <label class="field">
+            <span>Email</span>
+            <input
+              type="email"
+              id="email"
+              required
+              placeholder="you@example.com"
+            />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input
+              type="password"
+              id="password"
+              required
+              placeholder="••••••••"
+            />
+          </label>
+
+          <button type="submit" class="btn block">Login</button>
+        </form>
+
+        <p class="mini muted">Don’t have an account? <a href="#">Sign up</a></p>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h4>Contact</h4>
+          <p>hello@azoom.example<br />+65 6000 0000</p>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <p>
+            <a href="/carList.html">Cars</a> ·
+            <a href="#howto">How it works</a> ·
+            <a href="#reviews">Reviews</a>
+          </p>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <p><a href="#">Instagram</a> · <a href="#">Facebook</a></p>
+        </div>
+      </div>
+      <div class="map">
+        <a href="/reserve.html">Reserve</a> | <a href="/rates.html">Rates</a> |
+        <a href="/faq.html">FAQ</a>
+      </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>
