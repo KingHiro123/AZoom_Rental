@@ -58,10 +58,13 @@ body {
 }
 
 .logo {
-  font-weight: 800;
+  /* font-weight: 800;
   font-size: 1.3rem;
   color: #fff;
-  text-decoration: none;
+  text-decoration: none; */
+  height: 40px; /* adjust to match your nav size */
+  width: auto; /* keep proportions */
+  display: block;
 }
 
 .nav {
@@ -202,7 +205,7 @@ body {
   align-items: center;
 }
 .meta {
-  color: #cfe0ee;
+  color: var(--text);
 }
 .tag {
   padding: 0.08rem 0.4rem;
@@ -410,8 +413,8 @@ body {
 } */
 
 /* Containers & type */
-.container {
-  max-width: 1100px;
+.car-container {
+  width: 1100px;
   margin-inline: auto;
   padding: 3rem 1.25rem;
 }
@@ -507,11 +510,85 @@ body {
   font-size: 1.5rem;
 }
 
+/* Hide full-day cards when hidden attribute is present */
+.rate-card[hidden] {
+  display: none !important;
+}
 .car-hero {
   width: 100%;
   max-width: 320px;
   margin: 0.25rem auto 0;
   display: block;
+}
+
+/* Under car list */
+.carList-hero {
+  position: absolute;
+  bottom: 0;
+  right: 0%;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  object-fit: fill;
+  z-index: 0;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+/* Specs under title: two lines (e.g., SUV / 5-seater) */
+.specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.specs li + li {
+  margin-top: 0.15rem;
+}
+/* Top-left pill badges */
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f1b2d; /* readable on the light pill */
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Big model title */
+.car-title {
+  margin: 0.25rem 0 0.6rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  line-height: 1.1;
+  color: var(--text);
+  font-weight: 800;
+}
+.car-card {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  padding: 1rem 1rem 0.25rem;
+  min-height: 420px; /* gives room for the big title + image */
+  overflow: hidden;
+}
+
+.cardList-body {
+  position: relative;
+  z-index: 1;
+  padding: 0.25rem 0.5rem 1rem;
 }
 
 /* Rows */
