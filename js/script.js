@@ -123,3 +123,70 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll('.rates-grid .rate-card[data-segment="fullday"]')
     .forEach((c) => (c.hidden = true));
 });
+
+//under carList.html
+//using search bar to filter car cards
+const searchInput = document.querySelector(".search input");
+const carCards = document.querySelectorAll(".car-card");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  carCards.forEach((card) => {
+    const text = card.textContent.toLowerCase();
+
+    if (text.includes(query)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+// Panel + groups
+const filterPanel = document.querySelector(".filters");
+const groups = [...filterPanel.querySelectorAll(".filter-group")];
+
+// All cards to filter
+const carCards2 = [...document.querySelectorAll(".car-card")];
+
+// Normalize helper
+const norm = (s) => (s || "").toLowerCase().trim();
+
+// Read current selections from each group (by <h3> title)
+function getSelections() {
+  const selections = {};
+  groups.forEach((group) => {
+    const key = norm(group.querySelector("h3")?.textContent);
+    const checked = [
+      ...group.querySelectorAll('input[type="checkbox"]:checked'),
+    ];
+    selections[key] = checked.map((cb) => norm(cb.parentElement.textContent));
+  });
+  return selections;
+}
+
+// Core filter: a card passes if, for every group that has selections,
+// the card text contains at least one of the group's selected tokens.
+function applyFilters() {
+  const selections = getSelections();
+
+  carCards2.forEach((card) => {
+    const text = norm(card.textContent);
+
+    const passes = Object.values(selections).every((tokens) => {
+      if (!tokens.length) return true; // no selection in this group
+      return tokens.some((token) => text.includes(token));
+    });
+
+    card.style.display = passes ? "" : "none";
+  });
+}
+
+// Re-filter whenever a checkbox is toggled
+filterPanel.addEventListener("change", (e) => {
+  if (e.target.matches('input[type="checkbox"]')) applyFilters();
+});
+
+// Initial run
+applyFilters();

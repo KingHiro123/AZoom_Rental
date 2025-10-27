@@ -101,7 +101,8 @@ body {
   justify-content: flex-end;
 }
 
-.btn {
+.btn,
+.sbtn {
   background: var(--brand);
   color: #fff;
   border: none;
@@ -111,11 +112,13 @@ body {
   font-weight: 800;
   transition: 0.15s;
 }
-.btn:hover {
+.btn:hover,
+.sbtn {
   background: var(--brand-dark);
   transform: translateY(-1px);
 }
-.btn.small {
+.btn.small,
+.sbtn.small {
   padding: 0.45rem 0.8rem;
   font-size: 0.95rem;
 }
@@ -179,7 +182,17 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
-
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--brand);
+  font-weight: 800;
+  cursor: pointer;
+}
+.link-btn:hover {
+  text-decoration: underline;
+}
+/*
 .card {
   background: var(--surface);
   border-radius: 16px;
@@ -203,8 +216,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.meta {
+} */
+/* .meta {
   color: var(--text);
 }
 .tag {
@@ -220,16 +233,7 @@ body {
 .price {
   font-weight: 800;
 }
-.link-btn {
-  background: none;
-  border: none;
-  color: var(--brand);
-  font-weight: 800;
-  cursor: pointer;
-}
-.link-btn:hover {
-  text-decoration: underline;
-}
+*/
 
 /* ========== STEPS & REVIEWS ========== */
 .steps,
@@ -318,18 +322,26 @@ body {
   background: rgba(255, 255, 255, 0.06);
   color: var(--text);
   outline: none;
+  transition: all 0.25s ease;
 }
 .search input::placeholder {
   color: var(--muted);
 }
-.search .btn {
+.search .sbtn {
   padding: 0.6rem 0.9rem;
+}
+.search input:hover,
+.search input:focus {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--brand, #ff7a1a);
+  box-shadow: 0 0 6px rgba(255, 122, 26, 0.4);
 }
 .sr {
   position: absolute;
   left: -9999px;
 }
 
+/* Filters */
 /* two-column body */
 .list-body {
   display: grid;
@@ -341,30 +353,107 @@ body {
 }
 
 /* filters (left) */
-.filters {
+/* .filters {
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   padding: 1rem;
   height: fit-content;
-  position: sticky; /* helpful on desktop */
+  position: sticky;
   top: 76px;
+} */
+
+.filters {
+  background: var(--panel, #f7f8fa);
+  border: 1px solid var(--line, #e6e8eb);
+  border-radius: 14px;
+  padding: 1rem;
+  position: sticky;
+  top: 76px;
+  height: fit-content;
+}
+
+/* .filter-group + .filter-group {
+  margin-top: 1rem;
+} */
+
+.filter-group {
+  padding: 0.75rem 0;
 }
 .filter-group + .filter-group {
-  margin-top: 1rem;
+  border-top: 1px solid var(--brand, #e6e8eb);
 }
-.filter-group h3 {
+
+/* .filter-group h3 {
   font-size: 1rem;
   margin: 0 0 0.5rem;
+} */
+
+.filter-group h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text, #0b1b2b);
 }
-.filters label {
+
+/* .filters label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0.35rem 0;
   cursor: pointer;
   color: var(--text);
+} */
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0;
+  cursor: pointer;
+  color: var(--text);
+  user-select: none;
 }
+
+/* Custom checkbox (square, outlined) */
+.filters input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--brand-dark);
+  border-radius: 6px;
+  background: var(--bg);
+  display: grid;
+  place-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover ring */
+.filters input[type="checkbox"]:hover {
+  box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
+}
+
+/* Focus ring (keyboard) */
+.filters input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--brand, #ff7a1a);
+  outline-offset: 2px;
+}
+
+/* Checked fill + tick */
+.filters input[type="checkbox"]:checked {
+  background: var(--brand, #ff7a1a);
+  border-color: var(--brand, #ff7a1a);
+}
+.filters input[type="checkbox"]:checked::after {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border: 3px solid #fff;
+  border-top: 0;
+  border-left: 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+
 .filter-apply {
   width: 100%;
   margin-top: 0.75rem;
@@ -374,6 +463,108 @@ body {
 .cards {
   align-content: start;
 }
+
+/* Under carList.html */
+.carList-hero {
+  position: absolute;
+  bottom: 0;
+  right: 0%;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  object-fit: fill;
+  z-index: 0;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+/* Specs under title: two lines (e.g., SUV / 5-seater) */
+.specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.specs li + li {
+  margin-top: 0.15rem;
+}
+/* Top-left pill badges */
+.badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f1b2d; /* readable on the light pill */
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.specs {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Big model title */
+.car-title {
+  margin: 0.25rem 0 0.6rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  line-height: 1.1;
+  color: var(--text);
+  font-weight: 600;
+}
+.car-card {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 1rem 1rem 0.25rem;
+  min-height: 420px; /* gives room for the big title + image */
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: 0.2s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+.cardList-body {
+  position: relative;
+  z-index: 1;
+  padding: 0.25rem 0.5rem 1rem;
+}
+
+/* .sbtn.block {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+.sbtn.outline {
+  background: transparent;
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
+  color: var(--text, #f2f4f8);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.sbtn.outline:hover {
+  border-color: var(--brand, #ff7a1a);
+  color: #fff;
+} */
 
 /* responsive */
 @media (max-width: 960px) {
@@ -521,90 +712,6 @@ body {
   display: block;
 }
 
-/* Under car list */
-.carList-hero {
-  position: absolute;
-  bottom: 0;
-  right: 0%;
-  width: 100%;
-  max-width: none;
-  height: auto;
-  object-fit: fill;
-  z-index: 0;
-  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
-  pointer-events: none;
-}
-/* Specs under title: two lines (e.g., SUV / 5-seater) */
-.specs {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 0.5rem;
-  color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-.specs li + li {
-  margin-top: 0.15rem;
-}
-/* Top-left pill badges */
-.badges {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.7rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #0f1b2d; /* readable on the light pill */
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.specs {
-  list-style: none;
-  margin: 0.3rem 0 0;
-  padding: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-/* Big model title */
-.car-title {
-  margin: 0.25rem 0 0.6rem;
-  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
-  line-height: 1.1;
-  color: var(--text);
-  font-weight: 600;
-}
-.car-card {
-  position: relative;
-  isolation: isolate;
-  background: var(--surface);
-  border-radius: 22px;
-  padding: 1rem 1rem 0.25rem;
-  min-height: 420px; /* gives room for the big title + image */
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: 0.2s ease;
-}
-
-.car-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-}
-.cardList-body {
-  position: relative;
-  z-index: 1;
-  padding: 0.25rem 0.5rem 1rem;
-}
-
 /* Rows */
 .rows {
   border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
@@ -644,8 +751,6 @@ body {
   border-color: var(--brand, #ff7a1a);
   color: #fff;
 }
-
-/* ===== rates page ===== */
 
 /* Reserve code */
 .container {

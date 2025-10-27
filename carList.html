@@ -60,7 +60,7 @@
             placeholder="Search make, model, or type…"
             aria-label="Search make, model, or type"
           />
-          <button class="btn" type="submit">
+          <button class="sbtn" type="submit">
             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
             <span class="sr">Search</span>
           </button>
@@ -72,57 +72,36 @@
         <!-- FILTERS -->
         <aside class="filters" aria-label="Filters">
           <div class="filter-group">
-            <h3>Type</h3>
-            <label><input type="checkbox" /> Sedan</label>
-            <label><input type="checkbox" /> SUV</label>
-            <label><input type="checkbox" /> Hatchback</label>
-            <label><input type="checkbox" /> MPV</label>
-          </div>
-
-          <div class="filter-group">
-            <h3>Transmission</h3>
-            <label><input type="checkbox" /> Automatic</label>
-            <label><input type="checkbox" /> Manual</label>
-          </div>
-
-          <div class="filter-group">
-            <h3>Fuel</h3>
+            <h3>Fuel Type</h3>
             <label><input type="checkbox" /> Petrol</label>
             <label><input type="checkbox" /> Hybrid</label>
             <label><input type="checkbox" /> Electric</label>
           </div>
-
           <div class="filter-group">
-            <h3>Price / day</h3>
-            <label><input type="checkbox" /> &lt; $50</label>
-            <label><input type="checkbox" /> $50–$70</label>
-            <label><input type="checkbox" /> $70–$100</label>
-            <label><input type="checkbox" /> $100+</label>
+            <h3>Brand</h3>
+            <label><input type="checkbox" /> Hyundai</label>
+            <label><input type="checkbox" /> Toyota</label>
+            <label><input type="checkbox" /> Mazda</label>
           </div>
 
-          <button class="btn filter-apply" type="button">Apply</button>
+          <div class="filter-group">
+            <h3>Vehicle Category</h3>
+            <label><input type="checkbox" /> Luxury</label>
+            <label><input type="checkbox" /> Economy</label>
+            <label><input type="checkbox" /> Standard</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Vehicle Type</h3>
+            <label><input type="checkbox" /> Sedan</label>
+            <label><input type="checkbox" /> SUV</label>
+            <label><input type="checkbox" /> Hatchback</label>
+          </div>
+          <!-- <button class="btn filter-apply" type="button">Apply</button> -->
         </aside>
 
         <!-- CARS GRID -->
         <section class="cards" aria-label="Cars">
-          <!-- <article class="card">
-            <img
-              src="/img/toyota_vios.png"
-              alt="Toyota Vios"
-              class="car-hero"
-            />
-
-            <div class="card-body">
-              <div>
-                <h3>Toyota Vios</h3>
-                <p class="meta">
-                  <span class="tag">Sedan</span>
-                  <span class="rating">★ 4.8</span>
-                </p>
-              </div>
-              <a class="link-btn" href="/reserve.html">Rent Now</a>
-            </div>
-          </article> -->
           <article class="car-card">
             <div class="cardList-body">
               <div class="badges">
@@ -135,7 +114,7 @@
               <h3 class="car-title">Toyota Vios</h3>
 
               <ul class="specs">
-                <li>Toyota</li>
+                <li>Sedan</li>
                 <li>5-seater</li>
               </ul>
 
@@ -151,23 +130,6 @@
             />
           </article>
 
-          <!-- <article class="card">
-            <img
-              src="/img/mazda3_hatchback.avif"
-              alt="Mazda 3 Sedan"
-              class="car-hero"
-            />
-            <div class="card-body">
-              <div>
-                <h3>Mazda 3 Sedan</h3>
-                <p class="meta">
-                  <span class="tag">Sedan</span>
-                  <span class="rating">★ 4.7</span>
-                </p>
-              </div>
-              <a class="link-btn" href="/reserve.html">Rent Now</a>
-            </div>
-          </article> -->
           <article class="car-card">
             <div class="cardList-body">
               <div class="badges">
@@ -195,24 +157,6 @@
               loading="lazy"
             />
           </article>
-
-          <!-- <article class="card">
-            <img
-              src="/img/hyundai.jpg"
-              alt="Hyundai Avante N-Line"
-              class="car-hero"
-            />
-            <div class="card-body">
-              <div>
-                <h3>Hyundai Avante N-Line</h3>
-                <p class="meta">
-                  <span class="tag">Hatch</span>
-                  <span class="rating">★ 4.6</span>
-                </p>
-              </div>
-              <a class="link-btn" href="/reserve.html">Rent Now</a>
-            </div>
-          </article> -->
 
           <article class="car-card">
             <div class="cardList-body">
