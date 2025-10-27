@@ -112,8 +112,7 @@ body {
   font-weight: 800;
   transition: 0.15s;
 }
-.btn:hover,
-.sbtn {
+.btn:hover {
   background: var(--brand-dark);
   transform: translateY(-1px);
 }
@@ -319,7 +318,7 @@ body {
   padding: 0.65rem 0.8rem;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.06);
+  /* background: rgba(255, 255, 255, 0.06); */
   color: var(--text);
   outline: none;
   transition: all 0.25s ease;
@@ -332,7 +331,7 @@ body {
 }
 .search input:hover,
 .search input:focus {
-  background: rgba(255, 255, 255, 0.18);
+  /* background: rgba(255, 255, 255, 0.18); */
   border-color: var(--brand, #ff7a1a);
   box-shadow: 0 0 6px rgba(255, 122, 26, 0.4);
 }
@@ -454,11 +453,6 @@ body {
   transform: translateY(-1px) rotate(45deg);
 }
 
-.filter-apply {
-  width: 100%;
-  margin-top: 0.75rem;
-}
-
 /* cards already exist; we just ensure spacing works here */
 .cards {
   align-content: start;
@@ -470,9 +464,9 @@ body {
   bottom: 0;
   right: 0%;
   width: 100%;
-  max-width: none;
-  height: auto;
-  object-fit: fill;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
   z-index: 0;
   filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
   pointer-events: none;
@@ -521,8 +515,8 @@ body {
 /* Big model title */
 .car-title {
   margin: 0.25rem 0 0.6rem;
-  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
-  line-height: 1.1;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  line-height: 1;
   color: var(--text);
   font-weight: 600;
 }
