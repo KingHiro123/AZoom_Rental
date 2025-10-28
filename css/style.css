@@ -600,6 +600,130 @@ main::after {
 
 /* under rates.html */
 /* ===== rates page ===== */
+/* Section */
+.rates-hero {
+  margin-top: 2rem;
+}
+
+/* Segmented toggle */
+.rates-hero .segmented {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 4px;
+  gap: 4px;
+  margin: 0.5rem 0 1rem;
+}
+.rates-hero .seg-btn {
+  border: none;
+  background: transparent;
+  color: var(--text, #e6eef6);
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
+}
+.rates-hero .seg-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.rates-hero .seg-btn.active {
+  background: var(--brand, #ff7a1a);
+  color: #0b0f14;
+}
+
+/* Cards grid */
+/* .rates-hero .rates-grid {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1.25rem;
+} */
+.rates-hero .rates-grid {
+  display: flex;
+  justify-content: center; /* centers row horizontally */
+  align-items: stretch;
+  gap: 1.25rem;
+  width: 100%;
+  flex-wrap: nowrap; /* ✅ all cards stay in one horizontal row */
+  overflow-x: auto; /* allows scrolling if screen is smaller */
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Card */
+/* .rates-hero .rate-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background: var(--surface, #001e3a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: opacity 180ms ease, transform 180ms ease;
+} */
+.rates-hero .rate-card {
+  flex: 0 0 350px; /* ✅ fixed width; adjust as needed */
+  background: var(--surface, #001e3a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.rates-hero .rate-card:hover {
+  transform: translateY(-3px);
+}
+
+.rates-hero .rates-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.rates-hero .rates-grid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+}
+.rates-hero .rates-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* .rates-hero .rate-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+} */
+
+.rates-hero .rate-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.rates-hero .rate-card h3 {
+  margin: 0.75rem 0.75rem 0.25rem;
+}
+.rates-hero .rows {
+  padding: 0 0.75rem 0.75rem;
+}
+.rates-hero .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+.rates-hero .rows.subtle {
+  opacity: 0.9;
+}
+
+/* small animation for toggling */
+.rates-hero .rate-card[hidden] {
+  display: none !important;
+}
+.rates-hero .rate-card.toggle-enter {
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+}
+
 /* .rate-header h1 {
   display: flex;
   justify-content: center;
@@ -611,7 +735,7 @@ main::after {
 } */
 
 /* Containers & type */
-.car-container {
+/* .car-container {
   width: 1100px;
   margin-inline: auto;
   padding: 3rem 1.25rem;
@@ -627,14 +751,12 @@ main::after {
   color: var(--muted, #6b7280);
 }
 
-/* Hero */
 .rates-hero {
   text-align: center;
   padding-top: 5rem;
   padding-bottom: 1rem;
 }
 
-/* Segmented toggle */
 .rates-toggle {
   display: inline-flex;
   align-items: center;
@@ -678,7 +800,6 @@ main::after {
   transform: rotate(-30deg);
 }
 
-/* Grid of cards */
 .rates-grid {
   display: grid;
   gap: 1.25rem;
@@ -692,7 +813,6 @@ main::after {
   }
 }
 
-/* rate Card */
 .rate-card {
   background: var(--surface, #0a2b4d);
   border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
@@ -708,7 +828,6 @@ main::after {
   font-size: 1.5rem;
 }
 
-/* Hide full-day cards when hidden attribute is present */
 .rate-card[hidden] {
   display: none !important;
 }
@@ -719,7 +838,6 @@ main::after {
   display: block;
 }
 
-/* Rows */
 .rows {
   border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
   padding-top: 0.5rem;
@@ -740,7 +858,6 @@ main::after {
   font-weight: 800;
 }
 
-/* Buttons */
 .btn.block {
   display: block;
   text-align: center;
@@ -757,7 +874,7 @@ main::after {
 .btn.outline:hover {
   border-color: var(--brand, #ff7a1a);
   color: #fff;
-}
+} */
 
 /* Reserve code */
 .container {

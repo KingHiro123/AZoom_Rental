@@ -124,69 +124,105 @@ document.addEventListener("DOMContentLoaded", () => {
     .forEach((c) => (c.hidden = true));
 });
 
+//THIS IS A TEST FUNCTION FOR MY INDEX PAGE
+// const wrap = document.querySelector(".rates-hero");
+// const tabs = [...wrap.querySelectorAll(".seg-btn")];
+// const cards = [...wrap.querySelectorAll(".rate-card")];
+
+// function setView(view) {
+//   // update tabs
+//   tabs.forEach((t) => {
+//     const isActive = t.dataset.view === view;
+//     t.classList.toggle("active", isActive);
+//     t.setAttribute("aria-selected", isActive ? "true" : "false");
+//   });
+
+//   // show/hide cards with a tiny entrance animation
+//   cards.forEach((card) => {
+//     const match = card.getAttribute("data-segment") === view;
+//     if (match) {
+//       card.hidden = false;
+//       // animate in
+//       card.classList.add("toggle-enter");
+//       // force reflow
+//       card.getBoundingClientRect();
+//       card.classList.remove("toggle-enter");
+//     } else {
+//       card.hidden = true;
+//     }
+//   });
+// }
+
+// // click handlers
+// tabs.forEach((t) => {
+//   t.addEventListener("click", () => setView(t.dataset.view));
+// });
+
+// // init default view
+// setView("hourly");
+
 //under carList.html
-//using search bar to filter car cards
+// ===== unified search + filters (OR within group, AND across groups) =====
+
+// Elements
 const searchInput = document.querySelector(".search input");
-const carCards = document.querySelectorAll(".car-card");
-
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase().trim();
-
-  carCards.forEach((card) => {
-    const text = card.textContent.toLowerCase();
-
-    if (text.includes(query)) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-});
-
-// Panel + groups
 const filterPanel = document.querySelector(".filters");
-const groups = [...filterPanel.querySelectorAll(".filter-group")];
 
-// All cards to filter
-const carCards2 = [...document.querySelectorAll(".car-card")];
+// Early exit if not on car list
+if (filterPanel) {
+  const groups = [...filterPanel.querySelectorAll(".filter-group")];
+  const carCards = [...document.querySelectorAll(".car-card")];
 
-// Normalize helper
-const norm = (s) => (s || "").toLowerCase().trim();
+  // Normalize helper
+  const norm = (s) => (s || "").toLowerCase().trim();
 
-// Read current selections from each group (by <h3> title)
-function getSelections() {
-  const selections = {};
-  groups.forEach((group) => {
-    const key = norm(group.querySelector("h3")?.textContent);
-    const checked = [
-      ...group.querySelectorAll('input[type="checkbox"]:checked'),
-    ];
-    selections[key] = checked.map((cb) => norm(cb.parentElement.textContent));
-  });
-  return selections;
-}
-
-// Core filter: a card passes if, for every group that has selections,
-// the card text contains at least one of the group's selected tokens.
-function applyFilters() {
-  const selections = getSelections();
-
-  carCards2.forEach((card) => {
-    const text = norm(card.textContent);
-
-    const passes = Object.values(selections).every((tokens) => {
-      if (!tokens.length) return true; // no selection in this group
-      return tokens.some((token) => text.includes(token));
+  // Read current selections from each group (by <h3> title)
+  function getSelections() {
+    const selections = {};
+    groups.forEach((group) => {
+      const key = norm(group.querySelector("h3")?.textContent); // e.g., "brand"
+      const checked = [
+        ...group.querySelectorAll('input[type="checkbox"]:checked'),
+      ];
+      selections[key] = checked.map((cb) => norm(cb.parentElement.textContent));
     });
+    return selections;
+  }
 
-    card.style.display = passes ? "" : "none";
+  // Core filter: a card passes if, for every group that has selections,
+  // the card text contains at least one of the group's selected tokens (OR within group).
+  // Search is applied on top (AND with groups).
+  function applyFilters() {
+    const selections = getSelections();
+    const q = norm(searchInput?.value);
+
+    carCards.forEach((card) => {
+      const text = norm(card.textContent);
+
+      // AND across groups
+      const groupsPass = Object.values(selections).every((tokens) => {
+        if (!tokens.length) return true; // no selection in this group
+        return tokens.some((t) => text.includes(t)); // OR within this group
+      });
+
+      // search ANDs with group result
+      const searchPass = q ? text.includes(q) : true;
+
+      const passes = groupsPass && searchPass;
+      card.style.display = passes ? "" : "none";
+    });
+  }
+
+  // Wire up search (live) — now uses unified filter
+  if (searchInput) {
+    searchInput.addEventListener("input", applyFilters);
+  }
+
+  // Re-filter whenever a checkbox is toggled
+  filterPanel.addEventListener("change", (e) => {
+    if (e.target.matches('input[type="checkbox"]')) applyFilters();
   });
+
+  // Initial run
+  applyFilters();
 }
-
-// Re-filter whenever a checkbox is toggled
-filterPanel.addEventListener("change", (e) => {
-  if (e.target.matches('input[type="checkbox"]')) applyFilters();
-});
-
-// Initial run
-applyFilters();

@@ -71,6 +71,193 @@
         </div>
       </section>
 
+      <!-- RATES -->
+      <!-- <section class="hero">
+        <h2>Rates</h2>
+        <div class="rates-grid">bring out the rates page into this</div>
+      </section> -->
+      <!-- RATES -->
+      <section class="hero rates-hero">
+        <h2>Rates</h2>
+
+        <!-- segmented toggle -->
+        <div class="rates-toggle">
+          <div class="segmented" role="tablist" aria-label="Rate type">
+            <button
+              class="seg-btn active"
+              role="tab"
+              aria-selected="true"
+              data-view="hourly"
+            >
+              Hourly
+            </button>
+            <button
+              class="seg-btn"
+              role="tab"
+              aria-selected="false"
+              data-view="fullday"
+            >
+              Full-day
+            </button>
+          </div>
+        </div>
+
+        <!-- PRICE CARDS -->
+        <section class="rates-grid" aria-live="polite">
+          <!-- Economy -->
+          <article class="rate-card" data-segment="hourly">
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan"
+            />
+            <h3>Economy</h3>
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$3 / hr</strong>
+              </div>
+              <div class="row"><span>Normal</span><strong>$5 / hr</strong></div>
+              <div class="row"><span>Peak</span><strong>$9 / hr</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=economy" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <article class="rate-card" data-segment="fullday" hidden>
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan"
+            />
+            <h3>Economy</h3>
+            <div class="rows">
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$68 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$68 / day</strong>
+              </div>
+              <div class="row"><span>Deposit</span><strong>$0</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=economy" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <!-- Standard -->
+          <article class="rate-card" data-segment="hourly">
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan"
+            />
+            <h3>Standard</h3>
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$3 / hr</strong>
+              </div>
+              <div class="row"><span>Normal</span><strong>$6 / hr</strong></div>
+              <div class="row"><span>Peak</span><strong>$10 / hr</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=standard" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <article class="rate-card" data-segment="fullday" hidden>
+            <img
+              src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+              alt="Black sedan"
+            />
+            <h3>Standard</h3>
+            <div class="rows">
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$82 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$82 / day</strong>
+              </div>
+              <div class="row"><span>Deposit</span><strong>$0</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=standard" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <!-- Luxury -->
+          <article class="rate-card" data-segment="hourly">
+            <img
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+              alt="Blue hatchback"
+            />
+            <h3>Luxury</h3>
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$15 / hr</strong>
+              </div>
+              <div class="row">
+                <span>Normal</span><strong>$18 / hr</strong>
+              </div>
+              <div class="row"><span>Peak</span><strong>$21 / hr</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.49 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=luxury" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <article class="rate-card" data-segment="fullday" hidden>
+            <img
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+              alt="Blue hatchback"
+            />
+            <h3>Luxury</h3>
+            <div class="rows">
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$240 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$250 / day</strong>
+              </div>
+              <div class="row"><span>Deposit</span><strong>$0</strong></div>
+            </div>
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.49 / km</strong>
+              </div>
+            </div>
+            <a href="./carList.html?filter=luxury" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+        </section>
+      </section>
+
       <!-- CARS -->
       <section id="cars" class="cars">
         <div class="section-head">
@@ -80,8 +267,91 @@
 
         <!-- MAKE SURE THAT THE SECTION FOLLOWS THE FORMATTING OF CAR LIST, OTHERWISE IT WILL BE INCONSISTENT -->
         <div class="cards">
-          <article class="car-card">
+          <!-- <article class="car-card">
             Take most popular cars from car list and put them here
+          </article> -->
+          <article class="car-card">
+            <div class="cardList-body">
+              <div class="badges">
+                <span class="badge"
+                  ><i class="fa-solid fa-gas-pump"></i> Petrol</span
+                >
+                <span class="badge">Economy</span>
+              </div>
+
+              <h3 class="car-title">Toyota Vios</h3>
+
+              <ul class="specs">
+                <li>Sedan</li>
+                <li>5-seater</li>
+              </ul>
+
+              <!-- Keep if you still want an action; otherwise remove -->
+              <a class="link-btn" href="./reserve.html">Rent now</a>
+            </div>
+
+            <img
+              src="./img/toyota_vios.png"
+              alt="Toyota Vios"
+              class="carList-hero"
+              loading="lazy"
+            />
+          </article>
+
+          <article class="car-card">
+            <div class="cardList-body">
+              <div class="badges">
+                <span class="badge"
+                  ><i class="fa-solid fa-gas-pump"></i> Petrol</span
+                >
+                <span class="badge">Standard</span>
+              </div>
+
+              <h3 class="car-title">Mazda 3</h3>
+
+              <ul class="specs">
+                <li>Sedan</li>
+                <li>4-seater</li>
+              </ul>
+
+              <!-- Keep if you still want an action; otherwise remove -->
+              <a class="link-btn" href="./reserve.html">Rent now</a>
+            </div>
+
+            <img
+              src="./img/mazda3_hatchback.avif"
+              alt="Mazda 3 Sedan"
+              class="carList-hero"
+              loading="lazy"
+            />
+          </article>
+
+          <article class="car-card">
+            <div class="cardList-body">
+              <div class="badges">
+                <span class="badge"
+                  ><i class="fa-solid fa-gas-pump"></i> Hybrid</span
+                >
+                <span class="badge">Luxury</span>
+              </div>
+
+              <h3 class="car-title">Hyundai Avante</h3>
+
+              <ul class="specs">
+                <li>SUV</li>
+                <li>6-seater</li>
+              </ul>
+
+              <!-- Keep if you still want an action; otherwise remove -->
+              <a class="link-btn" href="./reserve.html">Rent now</a>
+            </div>
+
+            <img
+              src="./img/hyundai.jpg"
+              alt="Hyundai Avante N-Line"
+              class="carList-hero"
+              loading="lazy"
+            />
           </article>
         </div>
         <!-- <div class="cards">
@@ -141,12 +411,6 @@
             </div>
           </article>
         </div> -->
-      </section>
-
-      <!-- RATES -->
-      <section class="steps">
-        <h2>Rates</h2>
-        <div class="rates-grid">bring out the rates page into this</div>
       </section>
 
       <!-- HOW TO -->
