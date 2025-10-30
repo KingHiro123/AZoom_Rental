@@ -61,7 +61,7 @@
         <!-- LEFT: FORM -->
         <form class="form-col" id="reserve-form">
           <!-- Vehicle (shown if user arrived from a car page) -->
-          <div class="form-card">
+          <!-- <div class="form-card">
             <div class="form-head">
               <h3>Selected vehicle</h3>
               <a href="./carList.html" class="mini-link">Change</a>
@@ -75,6 +75,26 @@
               <div class="veh-meta">
                 <h4 class="veh-name">Mazda 3 (Standard)</h4>
                 <p class="veh-tags mini">Auto • Petrol • 5 seats</p>
+              </div>
+            </div>
+          </div> -->
+          <div class="form-card">
+            <div class="form-head">
+              <h3>Selected vehicle</h3>
+              <a href="./carList.html" class="mini-link">Change</a>
+            </div>
+            <div class="vehicle-card">
+              <img
+                class="veh-img"
+                id="vehImg"
+                src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
+                alt="Mazda 3 Sedan"
+              />
+              <div class="veh-meta">
+                <h4 class="veh-name" id="vehName">Mazda 3 (Standard)</h4>
+                <p class="veh-tags mini" id="vehTags">
+                  Auto • Petrol • 5 seats
+                </p>
               </div>
             </div>
           </div>
@@ -121,15 +141,27 @@
           <!-- Plans (Hourly / Full-day) -->
           <div class="form-card">
             <h3>Plan</h3>
+
             <div class="segmented" role="tablist" aria-label="Plan">
-              <button class="seg-btn active" type="button" data-plan="hourly">
+              <button
+                class="seg-btn active"
+                type="button"
+                aria-selected="true"
+                data-plan="hourly"
+              >
                 Hourly
               </button>
-              <button class="seg-btn" type="button" data-plan="fullday">
+              <button
+                class="seg-btn"
+                type="button"
+                aria-selected="false"
+                data-plan="fullday"
+              >
                 Full-day
               </button>
+              <span class="seg-indicator" aria-hidden="true"></span>
             </div>
-            <p class="mini muted">Full-day can save up to 33% vs hourly.</p>
+            <!-- <p class="mini muted">Full-day can save up to 33% vs hourly.</p> -->
           </div>
 
           <!-- Mileage + Add-ons -->

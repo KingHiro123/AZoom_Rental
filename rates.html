@@ -37,7 +37,260 @@
     </header>
 
     <main>
-      <!-- HERO / INTRO -->
+      <!-- HERO -->
+      <section class="rates-hero container">
+        <div class="rates-hero">
+          <h1 class="rates-xl">Our rates</h1>
+          <p class="rates-lead">
+            You only pay for any hours and mileage you use. We cover the rest.
+          </p>
+        </div>
+
+        <div class="rates-toggle">
+          <div class="segmented" role="tablist" aria-label="Rate type">
+            <button
+              class="seg-btn active"
+              role="tab"
+              aria-selected="true"
+              data-view="hourly"
+            >
+              Hourly
+            </button>
+            <button
+              class="seg-btn"
+              role="tab"
+              aria-selected="false"
+              data-view="fullday"
+            >
+              Full–day
+            </button>
+            <span class="seg-indicator" aria-hidden="true"></span>
+            <!-- NEW -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VEHICLE TYPE LABEL -->
+      <section class="rates-panel">
+        <div class="rates-head">
+          <h2 class="h4">Petrol / Diesel / Hybrid vehicles</h2>
+          <!-- <a href="#" class="info-link">
+            <i class="fa-regular fa-circle-info"></i>
+            <span>Time period classification</span>
+          </a> -->
+        </div>
+
+        <div class="rates-grid" aria-live="polite">
+          <!-- Economy (Hourly) -->
+          <article class="rate-card" data-segment="hourly">
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+                alt="Red economy sedan"
+                class="car-hero"
+              />
+            </div>
+            <h3>Economy</h3>
+
+            <div class="rows">
+              <div class="row row-head"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$3 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Normal</span><strong>$5 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Peak</span><strong>$9 <em>/ hr</em></strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 <em>/ km</em></strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=economy" class="btn outline block">
+              Explore vehicle models
+            </a>
+          </article>
+
+          <!-- Standard (Hourly) -->
+          <article class="rate-card" data-segment="hourly">
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+                alt="Silver standard sedan"
+                class="car-hero"
+              />
+            </div>
+            <h3>Standard</h3>
+
+            <div class="rows">
+              <div class="row row-head"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$3 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Normal</span><strong>$6 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Peak</span><strong>$10 <em>/ hr</em></strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 <em>/ km</em></strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=standard" class="btn outline block">
+              Explore vehicle models
+            </a>
+          </article>
+
+          <!-- Select (Hourly) -->
+          <article class="rate-card" data-segment="hourly">
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+                alt="Orange select sedan"
+                class="car-hero"
+              />
+            </div>
+            <h3>Luxury</h3>
+
+            <div class="rows">
+              <div class="row row-head"><span>Time charge</span></div>
+              <div class="row">
+                <span>Off-peak</span><strong>$4 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Normal</span><strong>$7 <em>/ hr</em></strong>
+              </div>
+              <div class="row">
+                <span>Peak</span><strong>$11 <em>/ hr</em></strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 <em>/ km</em></strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=luxury" class="btn outline block">
+              Explore vehicle models
+            </a>
+          </article>
+
+          <!-- FULL DAY -->
+          <article class="rate-card" data-segment="fullday" hidden>
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+                alt="Black sedan"
+                class="car-hero"
+              />
+            </div>
+            <h3>Economy</h3>
+
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$68 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$68 / day</strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=economy" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <article class="rate-card" data-segment="fullday" hidden>
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
+                alt="Black sedan"
+                class="car-hero"
+              />
+            </div>
+
+            <h3>Standard</h3>
+
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$82 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$82 / day</strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.39 / km</strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=standard" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+
+          <article class="rate-card" data-segment="fullday" hidden>
+            <div class="car-plate">
+              <img
+                src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
+                alt="Blue hatchback"
+                class="car-hero"
+              />
+            </div>
+            <h3>Luxury</h3>
+
+            <div class="rows">
+              <div class="row"><span>Time charge</span></div>
+
+              <div class="row">
+                <span>Full-day (24h)</span><strong>$240 / day</strong>
+              </div>
+              <div class="row">
+                <span>Public Holidays</span><strong>$250 / day</strong>
+              </div>
+            </div>
+
+            <div class="rows subtle">
+              <div class="row">
+                <span>Mileage charge</span><strong>$0.49 / km</strong>
+              </div>
+            </div>
+
+            <a href="./carList.html?filter=luxury" class="btn outline block"
+              >Explore vehicle models</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <!-- GRID -->
+      <section class="rates-grid car-container" aria-live="polite"></section>
+    </main>
+
+    <!-- <main>
       <section class="rates-hero container">
         <h1 class="xl">Our rates</h1>
         <p class="lead">
@@ -45,7 +298,6 @@
           maintenance, charging, and fuel.
         </p>
 
-        <!-- SEGMENTED TOGGLE -->
         <div class="rates-toggle">
           <div class="segmented" role="tablist" aria-label="Rate type">
             <button
@@ -65,16 +317,10 @@
               Full-day
             </button>
           </div>
-          <!-- <div class="save-note">
-            <span class="curve" aria-hidden="true"></span>
-            Save up to 33%!
-          </div> -->
         </div>
       </section>
 
-      <!-- PRICE CARDS -->
       <section class="rates-grid car-container" aria-live="polite">
-        <!-- Economy -->
         <article class="rate-card" data-segment="hourly">
           <img
             src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
@@ -108,13 +354,14 @@
           <h3>Economy</h3>
 
           <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+
             <div class="row">
               <span>Full-day (24h)</span><strong>$68 / day</strong>
             </div>
             <div class="row">
               <span>Public Holidays</span><strong>$68 / day</strong>
             </div>
-            <div class="row"><span>Deposit</span><strong>$0</strong></div>
           </div>
 
           <div class="rows subtle">
@@ -128,7 +375,6 @@
           >
         </article>
 
-        <!-- Standard -->
         <article class="rate-card" data-segment="hourly">
           <img
             src="https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1200&auto=format&fit=crop"
@@ -163,13 +409,14 @@
           <h3>Standard</h3>
 
           <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+
             <div class="row">
               <span>Full-day (24h)</span><strong>$82 / day</strong>
             </div>
             <div class="row">
               <span>Public Holidays</span><strong>$82 / day</strong>
             </div>
-            <div class="row"><span>Deposit</span><strong>$0</strong></div>
           </div>
 
           <div class="rows subtle">
@@ -183,7 +430,6 @@
           >
         </article>
 
-        <!-- Select -->
         <article class="rate-card" data-segment="hourly">
           <img
             src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1200&auto=format&fit=crop"
@@ -219,13 +465,14 @@
           <h3>Luxury</h3>
 
           <div class="rows">
+            <div class="row"><span>Time charge</span></div>
+
             <div class="row">
               <span>Full-day (24h)</span><strong>$240 / day</strong>
             </div>
             <div class="row">
               <span>Public Holidays</span><strong>$250 / day</strong>
             </div>
-            <div class="row"><span>Deposit</span><strong>$0</strong></div>
           </div>
 
           <div class="rows subtle">
@@ -239,7 +486,7 @@
           >
         </article>
       </section>
-    </main>
+    </main> -->
 
     <!-- FOOTER -->
     <footer class="footer">

@@ -177,6 +177,7 @@ main::after {
   max-width: 1200px;
   margin: 1rem auto 0;
   padding: 1rem;
+  border-top: 2px solid var(--line);
 }
 .section-head {
   display: flex;
@@ -248,22 +249,19 @@ main::after {
 */
 
 /* ========== STEPS & REVIEWS ========== */
-.steps,
-.reviews {
+.steps {
   max-width: 1200px;
   margin: 1rem auto 0;
   padding: 1rem;
   border-top: 2px solid var(--line);
 }
-.steps-grid,
-.reviews-grid {
+.steps-grid {
   margin-top: 0.5rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
-.step,
-.review {
+.step {
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
@@ -600,264 +598,156 @@ main::after {
 
 /* under rates.html */
 /* ===== rates page ===== */
-/* Section */
+
+/* Typographic tweaks */
+.rates-xl {
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 74px;
+  margin: 0;
+}
+.rates-lead {
+  margin: 0.75rem auto 1.75rem;
+  font-size: 1.3rem;
+  color: var(--muted, #6b7280);
+  max-width: 680px;
+}
+
 .rates-hero {
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+  text-align: center;
+  flex-flow: column;
+  padding-top: 200px;
+  padding-bottom: 60px;
+  display: flex;
+}
+.rates-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.rates-label {
   margin-top: 2rem;
 }
 
-/* Segmented toggle */
-.rates-hero .segmented {
-  display: inline-flex;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  padding: 4px;
-  gap: 4px;
-  margin: 0.5rem 0 1rem;
-}
-.rates-hero .seg-btn {
-  border: none;
-  background: transparent;
-  color: var(--text, #e6eef6);
-  padding: 0.5rem 0.9rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
-}
-.rates-hero .seg-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-.rates-hero .seg-btn.active {
-  background: var(--brand, #ff7a1a);
-  color: #0b0f14;
+.rates-panel {
+  background: var(--nav); /* light grey panel */
+  border-radius: 28px;
+  padding: 1.25rem 1.25rem 2.25rem;
+  margin-top: 1.5rem;
 }
 
-/* Cards grid */
-/* .rates-hero .rates-grid {
+.rates-head {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0 0.75rem;
+}
+.rates-head h2 {
+  margin: 0;
+  font-size: 1.9rem; /* bold like the ref */
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.rates-panel .rates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
-} */
-.rates-hero .rates-grid {
-  display: flex;
-  justify-content: center; /* centers row horizontally */
-  align-items: stretch;
-  gap: 1.25rem;
-  width: 100%;
-  flex-wrap: nowrap; /* ✅ all cards stay in one horizontal row */
-  overflow-x: auto; /* allows scrolling if screen is smaller */
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
+  padding-top: 0.5rem;
 }
 
 /* Card */
-/* .rates-hero .rate-card {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  background: var(--surface, #001e3a);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: opacity 180ms ease, transform 180ms ease;
-} */
-.rates-hero .rate-card {
-  flex: 0 0 350px; /* ✅ fixed width; adjust as needed */
-  background: var(--surface, #001e3a);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.rates-hero .rate-card:hover {
-  transform: translateY(-3px);
-}
-
-.rates-hero .rates-grid::-webkit-scrollbar {
-  height: 8px;
-}
-.rates-hero .rates-grid::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-}
-.rates-hero .rates-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* .rates-hero .rate-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-} */
-
-.rates-hero .rate-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
-
-.rates-hero .rate-card h3 {
-  margin: 0.75rem 0.75rem 0.25rem;
-}
-.rates-hero .rows {
-  padding: 0 0.75rem 0.75rem;
-}
-.rates-hero .row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.25rem 0;
-}
-.rates-hero .rows.subtle {
-  opacity: 0.9;
-}
-
-/* small animation for toggling */
-.rates-hero .rate-card[hidden] {
-  display: none !important;
-}
-.rates-hero .rate-card.toggle-enter {
-  opacity: 0;
-  transform: translateY(6px) scale(0.98);
-}
-
-/* .rate-header h1 {
-  display: flex;
-  justify-content: center;
-}
-
-.rate-header p {
-  display: flex;
-  justify-content: center;
-} */
-
-/* Containers & type */
-/* .car-container {
-  width: 1100px;
-  margin-inline: auto;
-  padding: 3rem 1.25rem;
-}
-.xl {
-  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
-  line-height: 1.1;
-  margin: 0;
-}
-.lead {
-  margin: 1rem 0 2rem;
-  font-size: 1.125rem;
-  color: var(--muted, #6b7280);
-}
-
-.rates-hero {
-  text-align: center;
-  padding-top: 5rem;
-  padding-bottom: 1rem;
-}
-
-.rates-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-}
-.segmented {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  background: var(--surface, #0a2b4d);
-  border-radius: 999px;
-  padding: 0.25rem;
-  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.15));
-}
-.seg-btn {
-  border: 0;
-  background: transparent;
-  color: var(--text, #fff);
-  padding: 0.75rem 1.25rem;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.seg-btn.active {
-  background: var(--brand, #ff7a1a);
-  color: #fff;
-}
-.save-note {
-  position: relative;
-  font-size: 0.95rem;
-  color: var(--muted, #a9bed2);
-}
-.save-note .curve {
-  position: absolute;
-  left: -2.25rem;
-  top: -0.75rem;
-  width: 28px;
-  height: 28px;
-  border: 2px solid currentColor;
-  border-color: currentColor transparent transparent currentColor;
-  border-radius: 50% 0 0 0;
-  transform: rotate(-30deg);
-}
-
-.rates-grid {
-  display: grid;
-  gap: 1.25rem;
-  padding-top: 1rem;
-  padding-bottom: 4rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-@media (max-width: 960px) {
-  .rates-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .rate-card {
-  background: var(--surface, #0a2b4d);
-  border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  background: #ffffff;
+  border: 1px solid rgba(17, 24, 39, 0.08);
   border-radius: 18px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.2));
+  padding: 1.25rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-}
-.rate-card h3 {
-  margin: 0 0.25rem;
-  font-size: 1.5rem;
+  gap: 0.9rem;
 }
 
-.rate-card[hidden] {
-  display: none !important;
+/* Car image on a white slab */
+/* .car-plate {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(17, 24, 39, 0.06);
 }
 .car-hero {
   width: 100%;
-  max-width: 320px;
-  margin: 0.25rem auto 0;
+  max-width: 400px;
+  height: 200px;
+  object-fit: cover;
+  margin: 0 auto;
   display: block;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
+} */
+
+.car-plate {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0;
+  border: 1px solid rgba(17, 24, 39, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px; /* adjust to your preferred size */
 }
 
+.car-hero {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain; /* keeps whole car visible */
+}
+
+.rate-card h3 {
+  margin: 0.75rem;
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+/* Rows */
 .rows {
-  border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
-  padding-top: 0.5rem;
+  border-top: 1px solid rgba(17, 24, 39, 0.08);
+  padding-top: 0.35rem;
 }
 .rows.subtle {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 0.25rem;
+  padding: 0.55rem 0.25rem;
+}
+.row-head span {
+  color: #4b5563;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 .row span {
-  color: var(--muted, #a9bed2);
+  color: #6b7280;
 }
 .row strong {
-  font-weight: 800;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+.row strong em {
+  font-style: normal;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-left: 2px;
+  font-size: 0.95em;
 }
 
+/* Buttons */
 .btn.block {
   display: block;
   text-align: center;
@@ -865,27 +755,176 @@ main::after {
 }
 .btn.outline {
   background: transparent;
-  border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
-  color: var(--text, #f2f4f8);
-  padding: 0.75rem 1rem;
+  border: 1px solid rgba(17, 24, 39, 0.14);
+  color: #0f172a;
+  padding: 0.8rem 1rem;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .btn.outline:hover {
-  border-color: var(--brand, #ff7a1a);
-  color: #fff;
-} */
+  border-color: #1e5eff;
+  color: #111827;
+}
 
+/* Hide on toggle */
+.rate-card[hidden] {
+  display: none !important;
+}
+
+/* toggle button codes*/
+.segmented {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(15, 28, 50, 0.06);
+  border: 1px solid rgba(15, 28, 50, 0.14);
+  border-radius: 50px; /* smoother pill shape */
+  padding: 6px 8px; /* more horizontal padding */
+  box-shadow: none; /* flatter look */
+  overflow: hidden;
+  min-width: 260px; /* optional: ensures good proportion */
+  height: 56px; /* fixed height for consistent pill shape */
+  align-items: center;
+  /* border-radius: 999px;
+  padding: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden; */
+}
+
+/* Real element as the pill (no pseudo-element) */
+.seg-indicator {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 50px;
+  background: var(--brand);
+  box-shadow: none; /* remove glow */
+  /* box-shadow: 0 6px 16px rgba(30, 94, 255, 0.4); */
+  transition: left 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 0;
+}
+
+.seg-btn {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  background: transparent;
+  color: #111827;
+  padding: 0.75rem 1.75rem; /* a bit larger, fills pill better */
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem; /* slightly reduced from 1.2rem for balance */
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease;
+  line-height: 1;
+  /* position: relative;
+  z-index: 1;
+  border: 0;
+  background: transparent;
+  color: #111827;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 180ms ease, transform 240ms ease, background 0.4s ease; */
+}
+.seg-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.seg-btn:active {
+  transform: scale(0.96);
+}
+
+/* active text turns white; background handled by the pill */
+.seg-btn.active {
+  color: #fff;
+}
+
+.rates-grid .rate-card {
+  transition: transform 320ms ease, opacity 320ms ease;
+  will-change: transform, opacity;
+}
+
+.rate-card.anim-hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.rate-card.enter-from-right {
+  transform: translateX(28px);
+  opacity: 0;
+}
+.rate-card.enter-from-left {
+  transform: translateX(-28px);
+  opacity: 0;
+}
+.rate-card.leave-to-right {
+  transform: translateX(28px);
+  opacity: 0;
+}
+.rate-card.leave-to-left {
+  transform: translateX(-28px);
+  opacity: 0;
+}
+
+/* Cards grid */
+/* .rates-grid {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 4rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+} */
+@media (max-width: 960px) {
+  .rates-panel .rates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* == RESERVE == */
 /* Reserve code */
+/* Make ONLY the reserve page wider */
+.reserve-hero.container,
+.reserve-grid.container {
+  /* was max-width: 1100px on .container */
+  max-width: clamp(1180px, 92vw, 1360px);
+}
+
+/* Give more space to the left column; keep a tidy, fixed sidebar */
+@media (min-width: 1100px) {
+  .reserve-grid {
+    /* form grows, sidebar stays ~360px */
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 1.5rem; /* a touch more breathing room */
+  }
+  .summary-card {
+    max-width: 360px;
+  } /* prevent sidebar from stretching */
+}
+
+/* Optional: on very wide screens, go even wider */
+@media (min-width: 1440px) {
+  .reserve-hero.container,
+  .reserve-grid.container {
+    max-width: 1440px;
+  }
+
+  .reserve-grid {
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+  .summary-card {
+    max-width: 380px;
+  }
+}
+
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.25rem;
 }
-.xl {
-  font-size: clamp(2rem, 2.6vw + 1rem, 3rem);
-  margin: 0;
-}
+
 .lead {
   color: var(--muted, #a9bed2);
   margin: 0.5rem 0 1.5rem;
@@ -981,7 +1020,7 @@ main::after {
 }
 
 /* Segmented toggle (reuse from Rates page if you added it) */
-.segmented {
+/* .segmented {
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.25rem;
@@ -1001,7 +1040,7 @@ main::after {
 .seg-btn.active {
   background: var(--brand);
   color: #fff;
-}
+} */
 
 /* Vehicle */
 .vehicle-card {
