@@ -35,68 +35,6 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
-// ==== Reserve estimator (lightweight) ====
-(() => {
-  const typeSel = document.querySelector("#carType");
-  const start = document.querySelector("#start");
-  const end = document.querySelector("#end");
-  const extras = document.querySelectorAll('.checks input[type="checkbox"]');
-
-  const sumType = document.querySelector("#sumType");
-  const sumRate = document.querySelector("#sumRate");
-  const sumDays = document.querySelector("#sumDays");
-  const sumExtras = document.querySelector("#sumExtras");
-  const sumTotal = document.querySelector("#sumTotal");
-
-  if (!typeSel || !start || !end) return;
-
-  const dayMs = 24 * 60 * 60 * 1000;
-
-  function daysBetween() {
-    const s = new Date(start.value);
-    const e = new Date(end.value);
-    if (!(s instanceof Date) || !(e instanceof Date) || isNaN(s) || isNaN(e))
-      return 1;
-    const diff = Math.ceil((e - s) / dayMs);
-    return Math.max(diff, 1);
-  }
-
-  function ratePerDay() {
-    const opt = typeSel.selectedOptions[0];
-    return parseFloat(opt?.dataset?.rate || "58");
-  }
-
-  function extrasPerDay() {
-    let total = 0;
-    extras.forEach((cb) => {
-      if (cb.checked) total += Number(cb.dataset.extra || 0);
-    });
-    return total;
-  }
-
-  function format(n) {
-    return `$${n.toFixed(0)}`;
-  }
-
-  function update() {
-    const d = daysBetween();
-    const base = ratePerDay();
-    const ex = extrasPerDay();
-    const total = d * (base + ex);
-
-    sumType.textContent = typeSel.value;
-    sumRate.textContent = format(base);
-    sumDays.textContent = `${d} ${d > 1 ? "days" : "day"}`;
-    sumExtras.textContent = format(d * ex);
-    sumTotal.textContent = format(total);
-  }
-
-  [typeSel, start, end, ...extras].forEach((el) =>
-    el.addEventListener("input", update)
-  );
-  update();
-})();
-
 // under rates.html
 
 //rates.html enhanced toggle with animation
@@ -211,8 +149,84 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 });
+//rates.html filter from "Explore Vehicle Models" to carList.html
+/* ==== Prefilter with checked sidebar state: rates.html -> carList.html ==== */
 
-// ==== Car list filtering ====
+/* 1) On rates.html, store the chosen category when "Explore vehicle models" is clicked */
+document.addEventListener("click", (e) => {
+  const link = e.target.closest('a[href*="carList.html"]');
+  if (!link) return;
+
+  const card = link.closest(".rate-card");
+  if (!card) return;
+
+  const label = (card.querySelector("h3")?.textContent || "")
+    .trim()
+    .toLowerCase();
+  if (label) {
+    try {
+      sessionStorage.setItem("ratesPrefilter", label); // e.g. "economy"
+    } catch (_) {}
+  }
+  // let navigation proceed
+});
+
+/* 2) On carList.html, check the matching checkbox and trigger your existing filters */
+document.addEventListener("DOMContentLoaded", () => {
+  if (!/carlist\.html$/i.test(location.pathname)) return;
+
+  const filtersEl = document.querySelector(".filters");
+  const searchEl = document.querySelector(".search input");
+  if (!filtersEl) return;
+
+  // Prefer ?filter=, else sessionStorage
+  const params = new URLSearchParams(location.search);
+  let token = (params.get("filter") || "").trim().toLowerCase();
+  if (!token) {
+    try {
+      token = (sessionStorage.getItem("ratesPrefilter") || "").toLowerCase();
+      sessionStorage.removeItem("ratesPrefilter");
+    } catch (_) {}
+  }
+  if (!token) return;
+
+  // Try to find a matching label in the sidebar and check it
+  let matched = false;
+  const allLabels = Array.from(
+    filtersEl.querySelectorAll(".filter-group label")
+  );
+  allLabels.forEach((lbl) => {
+    const text = (lbl.textContent || "").trim().toLowerCase();
+    const cb = lbl.querySelector('input[type="checkbox"]');
+    if (!cb) return;
+    if (text === token) {
+      cb.checked = true;
+      matched = true;
+    }
+  });
+
+  if (matched) {
+    // Clear search so it doesn't AND with the checkbox unless you want it to
+    if (searchEl) {
+      searchEl.value = "";
+      searchEl.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    // Fire your existing filter change handler
+    filtersEl.dispatchEvent(new Event("change", { bubbles: true }));
+  } else {
+    // Fallback: use the search box like before
+    if (searchEl) {
+      searchEl.value = token;
+      searchEl.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+  }
+});
+
+//rates.html scripts ends here
+
+//start of carList.html scripts
+
+// ==== Car list filtering under carList.html (with filter tags)====
 // Elements
 const searchInput = document.querySelector(".search input");
 const filterPanel = document.querySelector(".filters");

@@ -16,6 +16,8 @@
   --bg: #fff6ed;
   --surface: #fff;
   --nav: #fb923c;
+  --nav-light: #ffd5b7;
+  --nav-dark: #da7e33;
   --brand: #f97316; /* bright orange */
   --brand-dark: #ea580c;
   --text: #2c1810;
@@ -249,7 +251,7 @@ main::after {
 */
 
 /* ========== STEPS & REVIEWS ========== */
-.steps {
+/* .steps {
   max-width: 1200px;
   margin: 1rem auto 0;
   padding: 1rem;
@@ -267,6 +269,61 @@ main::after {
   border-radius: 16px;
   padding: 1rem;
   text-align: center;
+} */
+.steps {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  border-top: 2px solid var(--line);
+}
+
+.steps-grid {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.step {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.step-num {
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background: var(--brand, #ff7a1a);
+  border-radius: 50%;
+  margin: 0 auto 0.5rem;
+}
+
+.icon {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.step h3 {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.step p {
+  font-size: 0.95rem;
+  color: var(--muted, #a9bed2);
+  margin-top: 0.25rem;
 }
 
 /* ========== FOOTER ========== */
@@ -571,31 +628,6 @@ main::after {
   color: #fff;
 } */
 
-/* responsive */
-@media (max-width: 960px) {
-  .list-body {
-    grid-template-columns: 1fr;
-  }
-  .filters {
-    position: static;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-}
-@media (max-width: 560px) {
-  .filters {
-    grid-template-columns: 1fr;
-  }
-  .search {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  .search input {
-    width: 100%;
-  }
-}
-
 /* under rates.html */
 /* ===== rates page ===== */
 
@@ -634,7 +666,7 @@ main::after {
 }
 
 .rates-panel {
-  background: var(--nav); /* light grey panel */
+  background: var(--bg); /* light grey panel */
   border-radius: 28px;
   padding: 1.25rem 1.25rem 2.25rem;
   margin-top: 1.5rem;
@@ -662,7 +694,7 @@ main::after {
 
 /* Card */
 .rate-card {
-  background: #ffffff;
+  background: var(--nav-light);
   border: 1px solid rgba(17, 24, 39, 0.08);
   border-radius: 18px;
   padding: 1.25rem;
@@ -877,11 +909,6 @@ main::after {
   padding-bottom: 4rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 } */
-@media (max-width: 960px) {
-  .rates-panel .rates-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* == RESERVE == */
 /* Reserve code */
@@ -893,31 +920,6 @@ main::after {
 }
 
 /* Give more space to the left column; keep a tidy, fixed sidebar */
-@media (min-width: 1100px) {
-  .reserve-grid {
-    /* form grows, sidebar stays ~360px */
-    grid-template-columns: minmax(0, 1fr) 360px;
-    gap: 1.5rem; /* a touch more breathing room */
-  }
-  .summary-card {
-    max-width: 360px;
-  } /* prevent sidebar from stretching */
-}
-
-/* Optional: on very wide screens, go even wider */
-@media (min-width: 1440px) {
-  .reserve-hero.container,
-  .reserve-grid.container {
-    max-width: 1440px;
-  }
-
-  .reserve-grid {
-    grid-template-columns: minmax(0, 1fr) 380px;
-  }
-  .summary-card {
-    max-width: 380px;
-  }
-}
 
 .container {
   max-width: 1100px;
@@ -957,11 +959,6 @@ main::after {
   gap: 1.25rem;
   align-items: start;
 }
-@media (max-width: 960px) {
-  .reserve-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .form-card,
 .summary-card {
@@ -977,11 +974,6 @@ main::after {
 .summary-col {
   position: sticky;
   top: 84px;
-}
-@media (max-width: 960px) {
-  .summary-col {
-    position: static;
-  }
 }
 
 /* Fields */
@@ -1007,11 +999,7 @@ main::after {
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 }
-@media (max-width: 640px) {
-  .grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
+
 .mini {
   font-size: 0.9rem;
 }
@@ -1219,6 +1207,7 @@ main::after {
 }
 
 /* ========== RESPONSIVE ========== */
+/* under index.html */
 @media (max-width: 960px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1255,5 +1244,82 @@ main::after {
   }
   .btn {
     width: 100%;
+  }
+}
+
+/* responsiveness under carList.html  */
+/* responsive */
+@media (max-width: 960px) {
+  .list-body {
+    grid-template-columns: 1fr;
+  }
+  .filters {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+@media (max-width: 560px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+  .search {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .search input {
+    width: 100%;
+  }
+}
+
+/* responsiveness under rates.html */
+@media (max-width: 960px) {
+  .rates-panel .rates-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* under reserve.html */
+@media (min-width: 1100px) {
+  .reserve-grid {
+    /* form grows, sidebar stays ~360px */
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 1.5rem; /* a touch more breathing room */
+  }
+  .summary-card {
+    max-width: 360px;
+  } /* prevent sidebar from stretching */
+}
+
+/* Optional: on very wide screens, go even wider */
+@media (min-width: 1440px) {
+  .reserve-hero.container,
+  .reserve-grid.container {
+    max-width: 1440px;
+  }
+
+  .reserve-grid {
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+  .summary-card {
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 960px) {
+  .reserve-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .summary-col {
+    position: static;
+  }
+}
+@media (max-width: 640px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
   }
 }
