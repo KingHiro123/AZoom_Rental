@@ -117,7 +117,8 @@ main::after {
 }
 
 .btn,
-.btn-ghost {
+.btn-ghost,
+.sbtn {
   background: var(--brand);
   color: #fff;
   border: none;
@@ -128,12 +129,14 @@ main::after {
   transition: 0.15s;
 }
 .btn:hover,
-.btn-ghost:hover {
+.btn-ghost:hover,
+.sbtn:hover {
   background: var(--brand-dark);
   transform: translateY(-1px);
 }
 .btn.small,
-.btn-ghost {
+.btn-ghost.small,
+.sbtn.small {
   padding: 0.45rem 0.8rem;
   font-size: 0.95rem;
 }
@@ -1317,7 +1320,7 @@ main::after {
 }
 
 /* ========== login ========== */
-.container {
+.login-page {
   max-width: 480px;
   margin: 0 auto;
   padding: 4rem 1rem;
