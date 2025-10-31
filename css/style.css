@@ -117,7 +117,7 @@ main::after {
 }
 
 .btn,
-.sbtn {
+.btn-ghost {
   background: var(--brand);
   color: #fff;
   border: none;
@@ -127,12 +127,13 @@ main::after {
   font-weight: 800;
   transition: 0.15s;
 }
-.btn:hover {
+.btn:hover,
+.btn-ghost:hover {
   background: var(--brand-dark);
   transform: translateY(-1px);
 }
 .btn.small,
-.sbtn.small {
+.btn-ghost {
   padding: 0.45rem 0.8rem;
   font-size: 0.95rem;
 }
@@ -851,18 +852,8 @@ main::after {
   cursor: pointer;
   transition: color 180ms ease, transform 180ms ease;
   line-height: 1;
-  /* position: relative;
-  z-index: 1;
-  border: 0;
-  background: transparent;
-  color: #111827;
-  padding: 0.7rem 1.4rem;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 180ms ease, transform 240ms ease, background 0.4s ease; */
 }
+
 .seg-btn:hover {
   background: rgba(0, 0, 0, 0.05);
 }
@@ -901,25 +892,12 @@ main::after {
   opacity: 0;
 }
 
-/* Cards grid */
-/* .rates-grid {
-  display: grid;
-  gap: 1.25rem;
-  padding-top: 0.5rem;
-  padding-bottom: 4rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-} */
-
 /* == RESERVE == */
 /* Reserve code */
-/* Make ONLY the reserve page wider */
 .reserve-hero.container,
 .reserve-grid.container {
-  /* was max-width: 1100px on .container */
   max-width: clamp(1180px, 92vw, 1360px);
 }
-
-/* Give more space to the left column; keep a tidy, fixed sidebar */
 
 .container {
   max-width: 1100px;
@@ -928,7 +906,7 @@ main::after {
 }
 
 .lead {
-  color: var(--muted, #a9bed2);
+  color: var(--muted);
   margin: 0.5rem 0 1.5rem;
 }
 
@@ -947,7 +925,7 @@ main::after {
   border-radius: 999px;
 }
 .stepper li.active {
-  background: var(--brand, #ff7a1a);
+  background: var(--brand);
   color: #fff;
   border-color: transparent;
 }
@@ -962,7 +940,7 @@ main::after {
 
 .form-card,
 .summary-card {
-  background: var(--surface, #0a2b4d);
+  background: var(--surface);
   border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
   border-radius: 16px;
   padding: 1.25rem;
@@ -970,13 +948,6 @@ main::after {
   margin-bottom: 1rem;
 }
 
-/* Sticky summary */
-.summary-col {
-  position: sticky;
-  top: 84px;
-}
-
-/* Fields */
 .field {
   display: grid;
   gap: 0.4rem;
@@ -989,7 +960,7 @@ main::after {
 .field select {
   width: 100%;
   background: transparent;
-  color: var(--text, #f2f4f8);
+  color: var(--text);
   border: 1px solid var(--line, rgba(255, 255, 255, 0.18));
   border-radius: 10px;
   padding: 0.7rem 0.9rem;
@@ -1004,31 +975,105 @@ main::after {
   font-size: 0.9rem;
 }
 .muted {
-  color: var(--muted, #a9bed2);
+  color: var(--muted);
 }
 
-/* Segmented toggle (reuse from Rates page if you added it) */
-/* .segmented {
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.25rem;
-  background: var(--bg, #002b5b);
-  border-radius: 999px;
-  padding: 0.25rem;
+/* ===== Key-Value strip (like your mock) ===== */
+.kv-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  padding: 0; /* we’ll pad inside kv items */
+  overflow: hidden;
 }
-.seg-btn {
-  border: 0;
+
+.kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
   background: transparent;
-  color: var(--text);
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
+  border-left: 1px solid var(--line, rgba(255, 255, 255, 0.08));
 }
-.seg-btn.active {
-  background: var(--brand);
-  color: #fff;
-} */
+.kv:first-child {
+  border-left: none;
+}
+
+.kv-ico {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.kv-text {
+  display: grid;
+  gap: 0.25rem;
+}
+.kv-label {
+  color: var(--muted, #a9bed2);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.kv-value {
+  font-size: clamp(1rem, 0.8rem + 0.6vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text, #f2f4f8);
+}
+
+/* Make selects / inputs look like plain text but still interactive */
+.selectlike select,
+.inputlike {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  width: 100%;
+  outline: none;
+}
+
+/* Show a minimal caret for select */
+.selectlike select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 16px) 52%, calc(100% - 11px) 52%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 28px;
+}
+
+/* Secondary card (2-up) */
+.kv-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+.kv-grid-2 .kv {
+  border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+}
+.kv-grid-2 .kv:first-child {
+  border-top: none;
+}
+
+/* Responsive stacking */
+@media (max-width: 820px) {
+  .kv-strip {
+    grid-template-columns: 1fr;
+  }
+  .kv {
+    border-left: none;
+    border-top: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+  }
+  .kv:first-child {
+    border-top: none;
+  }
+  .kv-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Vehicle */
 .vehicle-card {
@@ -1069,13 +1114,18 @@ main::after {
   color: var(--muted);
 }
 
-/* Summary */
+/* Summary (where all of the final computing is at) */
 .sum-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.4rem 0;
 }
+.summary-col {
+  position: sticky;
+  top: 84px;
+}
+
 .sum-row.total {
   font-size: 1.15rem;
   font-weight: 800;
@@ -1103,17 +1153,22 @@ main::after {
 .faq details {
   background: var(--surface);
   border-radius: 10px;
-  padding: 0.8rem 1rem;
+  padding: 2.8rem 1rem;
   margin: 0.6rem 0;
 }
 
 .faq summary {
   font-weight: 700;
   cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.faq details p {
+  font-size: 1.1rem;
 }
 
 /* ===== locations ===== */
-.loc-grid {
+/* .loc-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
@@ -1136,6 +1191,129 @@ main::after {
   width: 100%;
   height: 220px;
   border: 0;
+} */
+/* ===== locations (modern) ===== */
+.locations .title {
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
+  letter-spacing: -0.02em;
+}
+.locations .subtitle {
+  color: var(--muted, #95a3b3);
+  margin-top: 0.25rem;
+}
+
+/* legend tags */
+.loc-legend {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+}
+.tag.hq {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+.tag.pickup {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+.tag.return {
+  background: rgba(250, 204, 21, 0.15);
+  border-color: rgba(250, 204, 21, 0.35);
+}
+
+/* grid */
+.loc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.2rem);
+  margin-top: 1rem;
+}
+
+/* cards */
+.loc-card {
+  background: color-mix(in srgb, var(--surface, #111827) 92%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 120ms ease, box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+.loc-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.loc-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+.loc-card h3 {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin: 0.1rem 0 0.2rem;
+}
+
+.address {
+  color: var(--text, #e6eef6);
+  opacity: 0.9;
+  margin: 0 0 0.6rem;
+}
+
+.map-box {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* responsive map with fixed ratio */
+.map-box iframe {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  height: auto;
+  border: 0;
+  display: block;
+}
+
+.mini {
+  color: var(--muted, #9fb0c2);
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+}
+
+/* subtle CTA */
+.ghost-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  opacity: 0.9;
+  text-underline-offset: 3px;
+}
+.ghost-link:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 /* ========== login ========== */
@@ -1241,9 +1419,14 @@ main::after {
   .reviews-grid,
   .steps-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   .btn {
     width: 100%;
+  }
+
+  .btn-ghost {
+    width: auto;
   }
 }
 

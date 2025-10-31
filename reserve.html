@@ -101,7 +101,98 @@
           </div>
 
           <!-- Locations -->
+          <!-- Quick location/date/duration strip -->
+          <div class="form-card kv-strip">
+            <div class="kv">
+              <i class="fa-solid fa-location-dot kv-ico" aria-hidden="true"></i>
+              <div class="kv-text">
+                <span class="kv-label">Location</span>
+                <!-- Styled select looks like text -->
+                <label class="kv-value selectlike">
+                  <select
+                    id="pickup-loc"
+                    aria-label="Pick-up location"
+                  ></select>
+                </label>
+              </div>
+            </div>
+
+            <div class="kv">
+              <i class="fa-regular fa-calendar kv-ico" aria-hidden="true"></i>
+              <div class="kv-text">
+                <span class="kv-label">Date &amp; Time</span>
+                <!-- Large inline datetime (defaults to now via JS) -->
+                <input
+                  id="pickup-dt"
+                  type="datetime-local"
+                  class="kv-value inputlike"
+                />
+              </div>
+            </div>
+
+            <div class="kv">
+              <i class="fa-regular fa-clock kv-ico" aria-hidden="true"></i>
+              <div class="kv-text">
+                <span class="kv-label">Duration</span>
+                <label class="kv-value selectlike">
+                  <select id="rental-duration" aria-label="Rental duration">
+                    <option value="2h">2 hr</option>
+                    <option value="4h">4 hr</option>
+                    <option value="6h">6 hr</option>
+                    <option value="12h">12 hr</option>
+                    <option value="1d" selected>1 day</option>
+                    <option value="2d">2 days</option>
+                    <option value="3d">3 days</option>
+                    <option value="7d">7 days</option>
+                    <option value="custom">Custom…</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drop-off & auto return -->
           <div class="form-card">
+            <div class="kv-grid-2">
+              <div class="kv">
+                <i
+                  class="fa-solid fa-location-dot kv-ico"
+                  aria-hidden="true"
+                ></i>
+                <div class="kv-text">
+                  <span class="kv-label">Drop-off location</span>
+                  <label class="kv-value selectlike">
+                    <select
+                      id="dropoff-loc"
+                      aria-label="Drop-off location"
+                    ></select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="kv">
+                <i class="fa-regular fa-calendar kv-ico" aria-hidden="true"></i>
+                <div class="kv-text">
+                  <span class="kv-label">Return date &amp; time</span>
+                  <input
+                    id="return-dt"
+                    type="datetime-local"
+                    class="kv-value inputlike"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <p class="mini muted" style="margin-top: 0.5rem">
+              You can return to a different location if allowed by the car’s
+              zone.
+            </p>
+          </div>
+
+          <!-- Your existing summary column stays as is -->
+
+          <!-- <div class="form-card">
             <h3>Pick-up & drop-off</h3>
             <div class="grid-2">
               <label class="field">
@@ -137,7 +228,7 @@
               You can return to a different location if allowed by the car’s
               zone.
             </p>
-          </div>
+          </div> -->
 
           <!-- Plans (Hourly / Full-day) -->
           <div class="form-card">
@@ -162,7 +253,6 @@
               </button>
               <span class="seg-indicator" aria-hidden="true"></span>
             </div>
-            <!-- <p class="mini muted">Full-day can save up to 33% vs hourly.</p> -->
           </div>
 
           <!-- Mileage + Add-ons -->

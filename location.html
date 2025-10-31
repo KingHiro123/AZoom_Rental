@@ -36,6 +36,150 @@
     </header>
 
     <main class="page">
+      <section class="content locations">
+        <header class="loc-hero">
+          <h1 class="title">Where to Find Us</h1>
+          <p class="subtitle">
+            Headquarters, pickup spots, and return points. Choose what’s closest
+            to you.
+          </p>
+
+          <!-- simple legend / tags (optional) -->
+          <div class="loc-legend" aria-label="Location types">
+            <span class="tag hq"><i class="fa-solid fa-building"></i> HQ</span>
+            <span class="tag pickup"
+              ><i class="fa-solid fa-key"></i> Pickup</span
+            >
+            <span class="tag return"
+              ><i class="fa-solid fa-right-left"></i> Return</span
+            >
+          </div>
+        </header>
+
+        <div class="loc-grid">
+          <!-- HQ -->
+          <article class="loc-card">
+            <div class="loc-card-head">
+              <span class="tag hq" aria-label="Headquarters">HQ</span>
+              <h3>Headquarters</h3>
+            </div>
+            <p class="address">
+              <i class="fa-solid fa-location-dot"></i> 123 Marina Blvd, #04-01
+            </p>
+            <div class="map-box">
+              <iframe
+                title="Map – AZoom HQ"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Marina%20Bay%20Sands&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">
+              <i class="fa-regular fa-clock"></i> Mon–Fri: 9am–6pm ·
+              <i class="fa-solid fa-phone"></i> +65 6000 0000
+            </p>
+            <a
+              class="ghost-link"
+              href="https://www.google.com/maps/search/?api=1&query=Marina%20Bay%20Sands"
+              target="_blank"
+              rel="noopener"
+              >Open in Google Maps</a
+            >
+          </article>
+
+          <!-- Pickup – Downtown -->
+          <article class="loc-card">
+            <div class="loc-card-head">
+              <span class="tag pickup" aria-label="Pickup point">Pickup</span>
+              <h3>Pickup – Downtown</h3>
+            </div>
+            <p class="address">
+              <i class="fa-solid fa-location-dot"></i> 45 Clarke St, Carpark B
+            </p>
+            <div class="map-box">
+              <iframe
+                title="Map – Downtown Pickup"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Clarke%20Quay&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">
+              <i class="fa-regular fa-clock"></i> Open daily: 8am–10pm
+            </p>
+            <a
+              class="ghost-link"
+              href="https://www.google.com/maps/search/?api=1&query=Clarke%20Quay"
+              target="_blank"
+              rel="noopener"
+              >Open in Google Maps</a
+            >
+          </article>
+
+          <!-- NEW: Pickup – Orchard -->
+          <article class="loc-card">
+            <div class="loc-card-head">
+              <span class="tag pickup" aria-label="Pickup point">Pickup</span>
+              <h3>Pickup – Orchard</h3>
+            </div>
+            <p class="address">
+              <i class="fa-solid fa-location-dot"></i> 2 Orchard Turn, Carpark
+              Lobby A
+            </p>
+            <div class="map-box">
+              <iframe
+                title="Map – Orchard Pickup"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=ION%20Orchard&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">
+              <i class="fa-regular fa-clock"></i> Open daily: 8am–10pm
+            </p>
+            <a
+              class="ghost-link"
+              href="https://www.google.com/maps/search/?api=1&query=ION%20Orchard"
+              target="_blank"
+              rel="noopener"
+              >Open in Google Maps</a
+            >
+          </article>
+
+          <!-- Return – Airport -->
+          <article class="loc-card">
+            <div class="loc-card-head">
+              <span class="tag return" aria-label="Return point">Return</span>
+              <h3>Return – Airport</h3>
+            </div>
+            <p class="address">
+              <i class="fa-solid fa-location-dot"></i> Changi Airport T1 Car
+              Rental Bay
+            </p>
+            <div class="map-box">
+              <iframe
+                title="Map – Airport Return"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Changi%20Airport%20Terminal%201&output=embed"
+              ></iframe>
+            </div>
+            <p class="mini">
+              <i class="fa-regular fa-clock"></i> 24/7 returns available
+            </p>
+            <a
+              class="ghost-link"
+              href="https://www.google.com/maps/search/?api=1&query=Changi%20Airport%20Terminal%201"
+              target="_blank"
+              rel="noopener"
+              >Open in Google Maps</a
+            >
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- <main class="page">
       <section class="content">
         <h1>Where to Find Us</h1>
         <p>
@@ -48,7 +192,6 @@
             <h3>Headquarters</h3>
             <p>123 Marina Blvd, #04-01</p>
             <div class="map-embed">
-              <!-- Replace q= with your real address -->
               <iframe
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
@@ -85,7 +228,7 @@
           </div>
         </div>
       </section>
-    </main>
+    </main> -->
 
     <footer class="footer">
       <div class="footer-grid">
