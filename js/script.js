@@ -35,6 +35,212 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
+// Login / Signup pages: simple form validation
+function safeGet(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    return JSON.parse(raw);
+  } catch (e) {
+    console.warn(`[AZoom] Corrupt JSON in localStorage[${key}]. Resetting.`, e);
+    localStorage.removeItem(key);
+    return fallback;
+  }
+}
+function safeSet(key, val) {
+  try {
+    localStorage.setItem(key, JSON.stringify(val));
+  } catch (e) {
+    console.error(`[AZoom] Failed to set localStorage[${key}].`, e);
+    alert("Storage failed. Are you in Incognito or blocking storage?");
+  }
+}
+
+const Store = {
+  getUsers() {
+    return safeGet("azoom_users", {});
+  },
+  setUsers(obj) {
+    safeSet("azoom_users", obj);
+  },
+  getCurrent() {
+    return safeGet("azoom_current_user", null);
+  },
+  setCurrent(user) {
+    safeSet("azoom_current_user", user);
+  },
+  clearCurrent() {
+    localStorage.removeItem("azoom_current_user");
+  },
+};
+
+// ---------- Header ----------
+function initGlobalHeader() {
+  const loginBox = document.querySelector(".login");
+  if (!loginBox) return;
+
+  const current = Store.getCurrent();
+  console.log("[AZoom] Header init. Current user:", current);
+
+  if (current && current.name) {
+    const first = current.name.split(" ")[0];
+    loginBox.innerHTML = `
+ 
+        <span class="user-name">Hi, ${first}</span>
+        <button class="btn small" id="logoutBtn">Logout</button>
+
+      `;
+    const btn = document.getElementById("logoutBtn");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        if (confirm("Log out of your account?")) {
+          Store.clearCurrent();
+          window.location.reload();
+        }
+      });
+    }
+  } else {
+    loginBox.innerHTML = `<a href="./login.html" class="btn small">Login</a>`;
+  }
+}
+
+// ---------- Sign Up ----------
+function initSignup() {
+  const form = document.getElementById("signupForm");
+  if (!form) return;
+  console.log("[AZoom] Signup page detected.");
+
+  const nameEl = document.getElementById("name");
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+  const confirmEl = document.getElementById("confirm");
+
+  // Load draft
+  const draft = safeGet("signup_draft", {});
+  if (draft.name) nameEl.value = draft.name;
+  if (draft.email) emailEl.value = draft.email;
+  if (draft.password) passEl.value = draft.password;
+  if (draft.confirm) confirmEl.value = draft.confirm;
+
+  // Autosave draft
+  function saveDraft() {
+    safeSet("signup_draft", {
+      name: nameEl.value,
+      email: emailEl.value,
+      password: passEl.value,
+      confirm: confirmEl.value,
+    });
+  }
+  [nameEl, emailEl, passEl, confirmEl].forEach((el) =>
+    el.addEventListener("input", saveDraft)
+  );
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim().toLowerCase();
+    const pass = passEl.value;
+    const confirm = confirmEl.value;
+
+    if (!name || !email || !pass || !confirm) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    if (pass.length < 8) {
+      alert("Password must be at least 8 characters.");
+      return;
+    }
+    if (pass !== confirm) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const users = Store.getUsers();
+    console.log("[AZoom] Existing users before signup:", users);
+
+    if (users[email]) {
+      alert("An account with this email already exists. Please log in.");
+      window.location.href = "./login.html";
+      return;
+    }
+
+    users[email] = { name, email, pass, createdAt: new Date().toISOString() };
+    Store.setUsers(users);
+    localStorage.setItem("azoom_last_email", email);
+    localStorage.removeItem("signup_draft");
+
+    console.log("[AZoom] User saved. Users after signup:", Store.getUsers());
+    alert("Account created! You can now log in.");
+    window.location.href = "./login.html";
+  });
+}
+
+// ---------- Login ----------
+function initLogin() {
+  const form = document.getElementById("loginForm");
+  if (!form) return;
+  console.log("[AZoom] Login page detected.");
+
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+
+  const lastEmail = localStorage.getItem("azoom_last_email");
+  if (lastEmail && !emailEl.value) emailEl.value = lastEmail;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = emailEl.value.trim().toLowerCase();
+    const pass = passEl.value;
+
+    const users = Store.getUsers();
+    console.log("[AZoom] Users at login:", users);
+
+    const user = users[email];
+    if (!user) {
+      alert("No account found for this email. Please sign up.");
+      return;
+    }
+    if (user.pass !== pass) {
+      alert("Incorrect password. Try again.");
+      return;
+    }
+
+    Store.setCurrent(user);
+    alert(`Welcome back, ${user.name}!`);
+    window.location.href = "./index.html";
+  });
+}
+
+// ---------- Boot ----------
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("[AZoom] DOM ready. Booting scripts.");
+  initGlobalHeader();
+  initSignup();
+  initLogin();
+});
+
+/* ========== Scroll reveal for steps grids ========== */
+document.addEventListener("DOMContentLoaded", () => {
+  const grids = document.querySelectorAll(".steps .steps-grid");
+  grids.forEach((g) => g.classList.add("reveal"));
+
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target); // animate once
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  grids.forEach((g) => io.observe(g));
+});
+
 // under rates.html
 
 //rates.html enhanced toggle with animation
@@ -156,19 +362,24 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("click", (e) => {
   const link = e.target.closest('a[href*="carList.html"]');
   if (!link) return;
-
   const card = link.closest(".rate-card");
   if (!card) return;
 
   const label = (card.querySelector("h3")?.textContent || "")
     .trim()
     .toLowerCase();
+
   if (label) {
     try {
-      sessionStorage.setItem("ratesPrefilter", label); // e.g. "economy"
+      sessionStorage.setItem(
+        "ratesPrefilter",
+        JSON.stringify({
+          value: label,
+          ts: Date.now(),
+        })
+      );
     } catch (_) {}
   }
-  // let navigation proceed
 });
 
 /* 2) On carList.html, check the matching checkbox and trigger your existing filters */
@@ -179,15 +390,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchEl = document.querySelector(".search input");
   if (!filtersEl) return;
 
-  // Prefer ?filter=, else sessionStorage
   const params = new URLSearchParams(location.search);
   let token = (params.get("filter") || "").trim().toLowerCase();
+
   if (!token) {
+    // Only trust storage if we came from rates.html very recently
+    let fromRates = false;
     try {
-      token = (sessionStorage.getItem("ratesPrefilter") || "").toLowerCase();
+      const ref = new URL(document.referrer);
+      fromRates = /rates\.html$/i.test(ref.pathname);
+    } catch (_) {}
+
+    if (fromRates) {
+      try {
+        const raw = sessionStorage.getItem("ratesPrefilter");
+        if (raw) {
+          const data = JSON.parse(raw);
+          // optional: expire after 10 seconds
+          if (
+            data &&
+            data.value &&
+            (!data.ts || Date.now() - data.ts < 10_000)
+          ) {
+            token = String(data.value).toLowerCase();
+          }
+        }
+      } catch (_) {}
+    }
+    // Consume/clear regardless to avoid stickiness
+    try {
       sessionStorage.removeItem("ratesPrefilter");
     } catch (_) {}
   }
+
   if (!token) return;
 
   // Try to find a matching label in the sidebar and check it
@@ -291,6 +526,7 @@ if (filterPanel) {
 }
 
 //Reserved page
+
 // ==== Save clicked car from carList -> sessionStorage ====
 document.addEventListener("click", (e) => {
   const link = e.target.closest(".link-btn");
@@ -388,246 +624,515 @@ document.addEventListener("DOMContentLoaded", () => {
   tagsEl.textContent = `${typeDisplay} • ${fuelDisplay} • ${seatsDisplay}`;
 });
 
-// ==== Reserve page: pricing engine using rates.html numbers ====
+// ==== Reserve page ====
+document.addEventListener("DOMContentLoaded", () => {
+  /* =========================
+   TIME SELECTS (24h, every 1h)
+========================== */
+  function generateTimeOptions(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    select.innerHTML = "";
+    for (let hour = 0; hour < 24; hour++) {
+      const h = String(hour).padStart(2, "0");
+      const opt = document.createElement("option");
+      opt.value = `${h}:00`;
+      opt.textContent = `${h}:00`;
+      select.appendChild(opt);
+    }
+  }
+  generateTimeOptions("pickup-time");
+  generateTimeOptions("return-time");
 
-// Exact tables from rates.html (Petrol/Diesel/Hybrid vehicles)
-const RATES = {
-  hourly: {
-    // You can switch "band" to 'offpeak' | 'normal' | 'peak' later if needed.
-    bands: {
-      offpeak: { Economy: 3, Standard: 3, Luxury: 4 }, // $/hr
-      normal: { Economy: 5, Standard: 6, Luxury: 7 }, // $/hr
-      peak: { Economy: 9, Standard: 10, Luxury: 11 }, // $/hr
-    },
-    // mileage for hourly (all categories the same in your page)
-    perKm: ({ category }) => 0.39,
-  },
-  fullday: {
-    perDay: { Economy: 68, Standard: 82, Luxury: 240 }, // $/day
-    // mileage for full-day: luxury differs
-    perKm: ({ category }) => (category === "Luxury" ? 0.49 : 0.39),
-  },
-};
+  // Default both times to next full hour
+  function roundToNextHour() {
+    const now = new Date();
+    if (now.getMinutes() > 0) {
+      now.setHours(now.getHours() + 1);
+      now.setMinutes(0, 0, 0);
+    }
+    return now;
+  }
+  const now = roundToNextHour();
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const defaultTime = `${pad2(now.getHours())}:00`;
+  const pickupTimeSel = document.getElementById("pickup-time");
+  const returnTimeSel = document.getElementById("return-time");
+  if (pickupTimeSel) pickupTimeSel.value = defaultTime;
+  if (returnTimeSel) returnTimeSel.value = defaultTime;
 
-// Choose which hourly band to use.
-// Your reserve.html has no UI for bands, so default to 'normal' to match the page text.
-const HOURLY_BAND = "normal"; // 'offpeak' | 'normal' | 'peak'
+  /* =========================
+     DATE LIMITS (no past; return >= pickup)
+  ========================== */
+  const pickupDate = document.getElementById("pickup-date");
+  const returnDate = document.getElementById("return-date");
+  const fmtDate = (d) =>
+    `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+  if (pickupDate && returnDate) {
+    const today = new Date();
+    const todayStr = fmtDate(today);
+    pickupDate.min = todayStr;
+    returnDate.min = todayStr;
+    if (!pickupDate.value) pickupDate.value = todayStr;
+    if (!returnDate.value) returnDate.value = todayStr;
 
-// Promo examples (optional)
-const PROMOS = {
-  SAVE10: { type: "percent", value: 0.1 },
-  FREEMI: { type: "mileage_free", value: true },
-};
+    pickupDate.addEventListener("change", () => {
+      const pick = new Date(pickupDate.value);
+      const minStr = fmtDate(pick);
+      returnDate.min = minStr;
+      if (new Date(returnDate.value) < pick) returnDate.value = minStr;
+      updateSummary();
+    });
+    returnDate.addEventListener("change", updateSummary);
+  }
 
-(function initReservePricingFromRatesPage() {
-  const form = document.querySelector("#reserve-form");
-  const summary = document.querySelector("#price-summary");
-  if (!form || !summary) return; // not on reserve page
+  /* =========================
+     LOCATIONS (pickup vs dropoff)
+  ========================== */
+  const pickupLocSel = document.getElementById("pickup-loc");
+  const dropoffLocSel = document.getElementById("dropoff-loc");
 
-  // Inputs
-  const mileageEl = form.querySelector("#mileage");
-  const promoEl = form.querySelector("#promo");
-  const addonChecks = [
-    ...form.querySelectorAll('.checks input[type="checkbox"]'),
+  function harvestLocationsFromDOM() {
+    const cards = document.querySelectorAll(".loc-card");
+    const list = [];
+    cards.forEach((card) => {
+      const head = card.querySelector(".loc-card-head");
+      const tag = head?.querySelector(".tag");
+      const h3 = head?.querySelector("h3");
+      const addr = card.querySelector(".address");
+      if (!tag || !h3) return;
+      let type = "";
+      if (tag.classList.contains("pickup")) type = "pickup";
+      else if (tag.classList.contains("return")) type = "dropoff";
+      else if (tag.classList.contains("hq")) type = "hq";
+      if (type === "hq") return;
+
+      const raw = h3.textContent.trim();
+      const label = raw
+        .replace(/^Pickup\s*–\s*/i, "")
+        .replace(/^Return\s*–\s*/i, "")
+        .trim();
+      const value = `${label}-${type}`
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-");
+      list.push({
+        name: label,
+        type,
+        title: raw,
+        address: addr?.textContent?.trim() || "",
+        value,
+      });
+    });
+    return list;
+  }
+
+  const fallbackLocations = [
+    { name: "Downtown", type: "pickup", value: "downtown-pickup" },
+    { name: "Orchard", type: "pickup", value: "orchard-pickup" },
+    { name: "Airport", type: "dropoff", value: "airport-dropoff" },
   ];
-  const coverRadios = [...form.querySelectorAll('input[name="cover"]')];
-  const dtEls = [...form.querySelectorAll('input[type="datetime-local"]')];
-  const pickupEl = dtEls[0] || null;
-  const returnEl = dtEls[1] || null;
-
-  // Plan segmented
-  const planSeg = form.querySelector(".segmented[aria-label='Plan']");
-  let currentPlan = "hourly";
-
-  // Summary fields
-  const sumTime = summary.querySelector("#sum-time");
-  const sumMileage = summary.querySelector("#sum-mileage");
-  const sumAddons = summary.querySelector("#sum-addons");
-  const sumCover = summary.querySelector("#sum-cover");
-  const sumPromo = summary.querySelector("#sum-promo");
-  const sumTotal = summary.querySelector("#sum-total");
-
-  // Selected car context (from carList -> sessionStorage)
-  let car = null;
-  try {
-    const raw = sessionStorage.getItem("selectedCar");
-    if (raw) car = JSON.parse(raw);
-  } catch (_) {}
-  // Normalise casing and fallbacks
-  const norm = (s) => (s || "").toString().trim();
-  const category = (() => {
-    const c = norm(car?.category).toLowerCase();
-    if (c.includes("economy")) return "Economy";
-    if (c.includes("luxury") || c.includes("select")) return "Luxury";
-    return "Standard";
+  const locations = (() => {
+    const harvested = harvestLocationsFromDOM();
+    return harvested && harvested.length ? harvested : fallbackLocations;
   })();
-  const fuel = (() => {
-    const f = norm(car?.fuel).toLowerCase();
-    if (f.includes("diesel")) return "Diesel";
-    if (f.includes("hybrid")) return "Hybrid";
-    if (f.includes("electric")) return "Electric";
-    return "Petrol";
+
+  function populateSelect(selectEl, items, placeholder) {
+    if (!selectEl) return;
+    selectEl.innerHTML = "";
+    const ph = document.createElement("option");
+    ph.value = "";
+    ph.textContent = placeholder;
+    selectEl.appendChild(ph);
+    items
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .forEach((loc) => {
+        const opt = document.createElement("option");
+        opt.value = loc.value || loc.name;
+        opt.textContent = loc.name;
+        selectEl.appendChild(opt);
+      });
+  }
+  populateSelect(
+    pickupLocSel,
+    locations.filter((l) => l.type === "pickup"),
+    "Select pick-up…"
+  );
+  populateSelect(
+    dropoffLocSel,
+    locations.filter((l) => l.type === "dropoff"),
+    "Select drop-off…"
+  );
+
+  /* =========================
+     STEPPER (prev/next + indicator)
+  ========================== */
+  const stepPanels = document.querySelectorAll(".form-step");
+  const nextBtns = document.querySelectorAll(".next-step");
+  const backBtns = document.querySelectorAll(".back-step");
+  const indicators = document.querySelectorAll(".stepper li");
+  let currentStep = 0;
+
+  function showStep(index) {
+    stepPanels.forEach((p, i) => {
+      p.classList.remove("active");
+      p.style.display = i === index ? "block" : "none";
+    });
+    setTimeout(() => stepPanels[index].classList.add("active"), 10);
+    indicators.forEach((li, i) => li.classList.toggle("active", i === index));
+  }
+  nextBtns.forEach((b) =>
+    b.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentStep < stepPanels.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    })
+  );
+  backBtns.forEach((b) =>
+    b.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    })
+  );
+  showStep(currentStep);
+
+  /* =========================
+     PRICING (plan/rates + summary)
+  ========================== */
+  const state = {
+    plan: "hourly",
+    times: {
+      pickupDate,
+      pickupTime: pickupTimeSel,
+      returnDate,
+      returnTime: returnTimeSel,
+    },
+    summary: {
+      time: document.getElementById("sum-time"),
+      addons: document.getElementById("sum-addons"),
+      cover: document.getElementById("sum-cover"),
+      total: document.getElementById("sum-total"),
+    },
+    rates: { hourly: 12, fullday: 80 }, // fallback
+  };
+
+  // Vehicle name (to match rates.html if available)
+  const vehName = (
+    document.getElementById("vehName")?.textContent || ""
+  ).trim();
+
+  // Try sessionStorage first
+  const ss = sessionStorage.getItem("selectedCar");
+  if (ss) {
+    try {
+      const car = JSON.parse(ss);
+      if (car?.rates?.hourly && car?.rates?.fullday) {
+        state.rates = {
+          hourly: Number(car.rates.hourly),
+          fullday: Number(car.rates.fullday),
+        };
+
+        requestAnimationFrame(() => updateSummary());
+      }
+    } catch {}
+  }
+
+  // Fallback: try parse rates.html if we still have defaults
+  /* Sync rates from rates.html by category (Economy/Standard/Luxury) */
+  async function syncRatesFromRatesHtmlByCategory(cat) {
+    if (!cat) return; // nothing to do if we still don't know
+    try {
+      const res = await fetch("./rates.html");
+      if (!res.ok) return;
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      const findCard = (seg) =>
+        [...doc.querySelectorAll(`.rate-card[data-segment="${seg}"]`)].find(
+          (c) => {
+            const h = (c.querySelector("h3")?.textContent || "")
+              .trim()
+              .toLowerCase();
+            return h === cat; // matches "economy" | "standard" | "luxury"
+          }
+        );
+
+      const hourlyCard = findCard("hourly");
+      const fulldayCard = findCard("fullday");
+      if (!hourlyCard && !fulldayCard) return;
+
+      const num = (t) => {
+        const m = String(t)
+          .replace(/,/g, "")
+          .match(/(\d+(\.\d+)?)/);
+        return m ? Number(m[1]) : null;
+      };
+
+      // Hourly: prefer "Normal", fallback "Off-peak"
+      let hourly = null;
+      if (hourlyCard) {
+        const rows = [...hourlyCard.querySelectorAll(".row")];
+        const normal = rows.find((r) => /normal/i.test(r.textContent || ""));
+        const offpeak = rows.find((r) =>
+          /off-?peak/i.test(r.textContent || "")
+        );
+        const src = normal || offpeak;
+        hourly = src ? num(src.textContent) : null;
+      }
+
+      // Full-day: read "Full-day (24h)"
+      let fullday = null;
+      if (fulldayCard) {
+        const rows = [...fulldayCard.querySelectorAll(".row")];
+        const fd = rows.find((r) =>
+          /full[\-\u2013]?day/i.test(r.textContent || "")
+        );
+        fullday = fd ? num(fd.textContent) : null;
+      }
+
+      if (hourly != null || fullday != null) {
+        state.rates.hourly = hourly ?? state.rates.hourly;
+        state.rates.fullday = fullday ?? state.rates.fullday;
+        requestAnimationFrame(() => updateSummary());
+      }
+    } catch {
+      /* ignore and keep existing */
+    }
+  }
+
+  // Kick it off (AFTER selected car was applied to DOM)
+  (async () => {
+    const cat = detectCategory();
+    await syncRatesFromRatesHtmlByCategory(cat);
+  })();
+  function setPlanIndicatorByIndex(idx) {
+    const seg = document.querySelector(".form-card.plan .segmented");
+    const ind = seg?.querySelector(".seg-indicator");
+    if (!ind) return;
+    ind.style.left = idx === 0 ? "6px" : "calc(50% + 6px)";
+  }
+
+  function syncPlanUI(plan) {
+    state.plan = plan; // "hourly" | "fullday"
+    const seg = document.querySelector(".form-card.plan .segmented");
+    const btns = seg ? Array.from(seg.querySelectorAll(".seg-btn")) : [];
+    btns.forEach((b, i) => {
+      const active = b.dataset.plan === plan;
+      b.classList.toggle("active", active);
+      b.setAttribute("aria-selected", active ? "true" : "false");
+      if (active) setPlanIndicatorByIndex(i);
+    });
+  }
+
+  function setTimesEnabled(enabled) {
+    [pickupTimeSel, returnTimeSel].forEach((sel) => {
+      if (!sel) return;
+      sel.disabled = !enabled;
+      // Also disable options so dropdown looks fully greyed out
+      Array.from(sel.options).forEach((opt) => (opt.disabled = !enabled));
+    });
+  }
+
+  function applyDurationRules() {
+    const s = toDate(
+      state.times.pickupDate?.value,
+      state.times.pickupTime?.value
+    );
+    const e = toDate(
+      state.times.returnDate?.value,
+      state.times.returnTime?.value
+    );
+    if (!s || !e) return;
+
+    const days = Math.max(ceilDaysBetween(s, e), 0);
+    const overTwoDays = days > 2;
+
+    if (overTwoDays) {
+      // allow & enforce Full-day
+      setPlanButtonEnabled("fullday", true);
+      setPlanButtonEnabled("hourly", true); // optional: keep hourly clickable, we still enforce full-day
+      if (state.plan !== "fullday") syncPlanUI("fullday");
+      setTimesEnabled(false);
+    } else {
+      // lock Full-day, force Hourly
+      setPlanButtonEnabled("fullday", false);
+      setPlanButtonEnabled("hourly", true);
+      if (state.plan !== "hourly") syncPlanUI("hourly");
+      setTimesEnabled(true);
+    }
+  }
+
+  // Plan toggle
+  // REPLACE your current planButtons.forEach(...) with:
+  const planButtons = document.querySelectorAll(".form-card.plan .seg-btn");
+  planButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      // block clicks on disabled/aria-disabled buttons
+      if (
+        btn.disabled ||
+        btn.getAttribute("aria-disabled") === "true" ||
+        btn.classList.contains("is-disabled")
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      syncPlanUI(btn.dataset.plan);
+      updateSummary();
+    });
+  });
+
+  // On first load, position the plan pill under the active button
+  (() => {
+    const seg = document.querySelector(".form-card.plan .segmented");
+    if (!seg) return;
+    const btns = Array.from(seg.querySelectorAll(".seg-btn"));
+    const activeIdx = Math.max(
+      0,
+      btns.findIndex((b) => b.classList.contains("active"))
+    );
+    setPlanIndicatorByIndex(activeIdx);
   })();
 
   // Helpers
-  const hrMs = 60 * 60 * 1000;
-  const dayMs = 24 * hrMs;
-  const money = (n) => `$${Math.max(0, n).toFixed(2)}`;
-
-  const parseDateSafe = (el) => {
-    if (!el || !el.value) return null;
-    const d = new Date(el.value);
-    return isNaN(d) ? null : d;
-  };
-
-  function durations(plan) {
-    const s = parseDateSafe(pickupEl);
-    const e = parseDateSafe(returnEl);
-    if (!s || !e || e <= s) {
-      return plan === "hourly" ? { hours: 1, days: 1 } : { hours: 24, days: 1 };
-    }
-    const diff = e - s;
-    const hours = Math.ceil(diff / hrMs);
-    const days = Math.ceil(diff / dayMs);
-    return { hours: Math.max(hours, 1), days: Math.max(days, 1) };
-  }
-
-  function hourlyRate(cat) {
-    const bandTable =
-      RATES.hourly.bands[HOURLY_BAND] || RATES.hourly.bands.normal;
-    return bandTable[cat] ?? bandTable.Standard;
-  }
-
-  function fullDayRate(cat) {
-    const table = RATES.fullday.perDay;
-    return table[cat] ?? table.Standard;
-  }
-
-  function perKm(plan, cat /*, fuelType*/) {
-    // fuelType currently irrelevant per your rates page (Petrol/Diesel/Hybrid share one panel)
-    return plan === "hourly"
-      ? RATES.hourly.perKm({ category: cat })
-      : RATES.fullday.perKm({ category: cat });
-  }
-
-  function readCoverPerDay() {
-    const sel = coverRadios.find((r) => r.checked);
-    const v = Number(sel?.dataset.price || 0);
-    return isNaN(v) ? 0 : v;
-  }
-
-  const addonsFlat = () =>
-    addonChecks.reduce(
-      (sum, cb) =>
-        cb.checked
-          ? sum + Number(cb.dataset.price || cb.dataset.extra || 0)
-          : sum,
-      0
+  function setPlanButtonEnabled(plan, enabled) {
+    const btn = document.querySelector(
+      `.form-card.plan .seg-btn[data-plan="${plan}"]`
     );
-
-  const readPromo = () => {
-    const code = (promoEl?.value || "").trim().toUpperCase();
-    return PROMOS[code] || null;
-  };
-
-  function formatPromo(amount) {
-    // amount is negative
-    return `–$${Math.abs(amount).toFixed(2)}`;
+    if (!btn) return;
+    btn.disabled = !enabled;
+    btn.setAttribute("aria-disabled", enabled ? "false" : "true");
+    btn.classList.toggle("is-disabled", !enabled);
   }
 
-  function updateIndicator(segmentedEl, index) {
-    const indicator = segmentedEl?.querySelector(".seg-indicator");
-    if (!indicator) return;
-    indicator.style.left = index === 0 ? "6px" : "calc(50% + 6px)";
+  function toDate(dateStr, timeStr) {
+    if (!dateStr || !timeStr) return null;
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const [hh, mm] = timeStr.split(":").map(Number);
+    return new Date(y, m - 1, d, hh, mm, 0, 0);
   }
+  const hoursBetween = (a, b) => Math.max(0, (b - a) / 36e5);
+  const ceilDaysBetween = (a, b) => Math.ceil(hoursBetween(a, b) / 24);
 
-  function compute() {
-    const plan = currentPlan; // 'hourly' | 'fullday'
-    const { hours, days } = durations(plan);
-
-    // Time charge
-    const timeCharge =
-      plan === "hourly"
-        ? hourlyRate(category) * hours
-        : fullDayRate(category) * days;
-
-    // Mileage
-    const km = Math.max(0, Number(mileageEl?.value || 0));
-    const kmRate = perKm(plan, category /*, fuel*/);
-    let mileageCharge = km * kmRate;
-
-    // Add-ons
-    const addonsCharge = addonsFlat();
-
-    // Protection (per day; for hourly, ceil to day-equivalent)
-    const coverPerDay = readCoverPerDay();
-    const coverUnits = plan === "hourly" ? Math.ceil(hours / 24) : days;
-    const coverCharge = coverPerDay * coverUnits;
-
-    // Subtotal
-    let subtotal = timeCharge + mileageCharge + addonsCharge + coverCharge;
-
-    // Promo
-    let promoOff = 0;
-    const promoObj = readPromo();
-    if (promoObj) {
-      if (promoObj.type === "percent") {
-        promoOff = -subtotal * promoObj.value;
-      } else if (promoObj.type === "mileage_free") {
-        promoOff = -mileageCharge;
-        mileageCharge = 0; // show waived in the line item
-      }
-    }
-
-    const total = subtotal + promoOff;
-
-    // Write to DOM
-    sumTime.textContent = money(timeCharge);
-    sumMileage.textContent = money(mileageCharge);
-    sumAddons.textContent = money(addonsCharge);
-    sumCover.textContent = money(coverCharge);
-    sumPromo.textContent = promoOff ? formatPromo(promoOff) : "–$0.00";
-    sumTotal.textContent = money(total);
-  }
-
-  // Wire plan toggle
-  if (planSeg) {
-    const buttons = [...planSeg.querySelectorAll(".seg-btn")];
-    buttons.forEach((btn, i) => {
-      btn.addEventListener("click", () => {
-        if (btn.classList.contains("active")) return;
-        buttons.forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle("active", active);
-          b.setAttribute("aria-selected", active ? "true" : "false");
-        });
-        // Your buttons use data-view="hourly|fullday"
-        currentPlan = btn.dataset.plan || btn.dataset.view || "hourly";
-        updateIndicator(planSeg, i);
-        compute();
+  function getAddonsTotal() {
+    let sum = 0;
+    document
+      .querySelectorAll(".checks input[type='checkbox']:checked")
+      .forEach((c) => {
+        sum += Number(c.dataset.price || 0);
       });
-    });
-    const initIndex = Math.max(
-      0,
-      buttons.findIndex((b) => b.classList.contains("active"))
+    return sum;
+  }
+  function getCoverTotal() {
+    const r = document.querySelector(".radios input[type='radio']:checked");
+    return r ? Number(r.dataset.price || 0) : 0;
+  }
+  function getTimeCharge() {
+    const s = toDate(
+      state.times.pickupDate?.value,
+      state.times.pickupTime?.value
     );
-    updateIndicator(planSeg, initIndex === -1 ? 0 : initIndex);
-    currentPlan =
-      (buttons[initIndex] &&
-        (buttons[initIndex].dataset.plan || buttons[initIndex].dataset.view)) ||
-      "hourly";
+    const e = toDate(
+      state.times.returnDate?.value,
+      state.times.returnTime?.value
+    );
+    if (!s || !e || e <= s) return 0;
+    if (state.plan === "hourly") {
+      const hrs = Math.ceil(hoursBetween(s, e)); // bill by started hour
+      return state.rates.hourly * hrs;
+    } else {
+      const days = Math.max(1, ceilDaysBetween(s, e));
+      return state.rates.fullday * days;
+    }
+  }
+  const money = (n) => `$${(Number(n) || 0).toFixed(2)}`;
+
+  function updateSummary() {
+    const timeCharge = getTimeCharge();
+    const addons = getAddonsTotal();
+    const cover = getCoverTotal();
+    const total = timeCharge + addons + cover;
+    if (state.summary.time) state.summary.time.textContent = money(timeCharge);
+    if (state.summary.addons) state.summary.addons.textContent = money(addons);
+    if (state.summary.cover) state.summary.cover.textContent = money(cover);
+    if (state.summary.total) state.summary.total.textContent = money(total);
+  }
+  const __updateSummary = updateSummary;
+  updateSummary = function () {
+    applyDurationRules(); // checks if multi-day & greys out times
+    __updateSummary(); // runs the normal price update
+  };
+  // Recalc triggers
+  ["pickup-date", "pickup-time", "return-date", "return-time"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("change", updateSummary);
+  });
+  document
+    .querySelectorAll(".checks input[type='checkbox']")
+    .forEach((c) => c.addEventListener("change", updateSummary));
+  document
+    .querySelectorAll(".radios input[type='radio']")
+    .forEach((r) => r.addEventListener("change", updateSummary));
+  updateSummary();
+
+  /* =========================
+     DRIVER (manual form toggle)
+  ========================== */
+  const btnSingpass = document.getElementById("singpass");
+  const btnManual = document.getElementById("manual");
+  const manualBox = document.getElementById("driverManual");
+  if (btnManual && manualBox) {
+    btnManual.addEventListener("click", () => {
+      manualBox.hidden = !manualBox.hidden;
+    });
+  }
+  if (btnSingpass && manualBox) {
+    btnSingpass.addEventListener("click", () => {
+      manualBox.hidden = true;
+      alert("Redirecting to Singpass (demo)...");
+    });
   }
 
-  // Recompute on changes
-  [mileageEl, promoEl, pickupEl, returnEl].forEach((el) => {
-    if (!el) return;
-    el.addEventListener("input", compute);
-    el.addEventListener("change", compute);
-  });
-  [...addonChecks, ...coverRadios].forEach((el) =>
-    el.addEventListener("change", compute)
-  );
+  /* PAYMENT (confirm → spinner → success → redirect) */
+  const payBtn = document.querySelector(".pay-btn");
+  const overlay = document.getElementById("overlay");
 
-  // First run
-  compute();
-})();
+  if (payBtn) {
+    payBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const cardType = (
+        document.getElementById("cardType")?.value || ""
+      ).trim();
+      const name = (document.getElementById("cardName")?.value || "").trim();
+      const number = (
+        document.getElementById("cardNumber")?.value || ""
+      ).trim();
+      const expiry = (document.getElementById("expiry")?.value || "").trim();
+      const cvv = (document.getElementById("cvv")?.value || "").trim();
+
+      if (!cardType || !name || !number || !expiry || !cvv) {
+        alert("Please fill in all payment fields.");
+        return;
+      }
+
+      if (!confirm("Are you sure you want to proceed with payment?")) return;
+
+      // Show spinner ONLY after confirm
+      overlay?.classList.add("show");
+
+      // Simulate processing delay
+      setTimeout(() => {
+        overlay?.classList.remove("show"); // hide spinner
+        alert("Payment successful, thanks!");
+        setTimeout(() => {
+          window.location.href = "./index.html";
+        }, 2000);
+      }, 2000);
+    });
+  }
+});

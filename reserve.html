@@ -1,4 +1,3 @@
-<!-- New code - 14/10/2025 -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +36,9 @@
         <button class="menu" aria-label="Open menu">
           <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
-        <div class="login"><a href="#" class="btn small">Login</a></div>
+        <div class="login">
+          <a href="./login.html" class="btn small">Login</a>
+        </div>
       </div>
     </header>
 
@@ -60,108 +61,28 @@
       <section class="reserve-grid container">
         <!-- LEFT: FORM -->
         <form class="form-col" id="reserve-form">
-          <!-- Vehicle (shown if user arrived from a car page) -->
-          <!-- <div class="form-card">
-            <div class="form-head">
-              <h3>Selected vehicle</h3>
-              <a href="./carList.html" class="mini-link">Change</a>
-            </div>
-            <div class="vehicle-card">
-              <img
-                class="veh-img"
-                src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
-                alt="Mazda 3 Sedan"
-              />
-              <div class="veh-meta">
-                <h4 class="veh-name">Mazda 3 (Standard)</h4>
-                <p class="veh-tags mini">Auto • Petrol • 5 seats</p>
+          <!-- STEP 1: DETAILS -->
+          <div class="form-step active" data-step="1">
+            <!-- Trip details strip -->
+            <div class="card strip">
+              <div class="item">
+                <i class="fa-solid fa-location-dot ico" aria-hidden="true"></i>
+                <div class="text">
+                  <span class="label">Pick-up Location</span>
+                  <label class="value select-inline">
+                    <select
+                      id="pickup-loc"
+                      aria-label="Pick-up location"
+                    ></select>
+                  </label>
+                </div>
               </div>
-            </div>
-          </div> -->
-          <!-- THIS I MIGHT NEED TO CHANGE T^T -->
-          <div class="form-card">
-            <div class="form-head">
-              <h3>Selected vehicle</h3>
-              <a href="./carList.html" class="mini-link">Change</a>
-            </div>
-            <div class="vehicle-card">
-              <img
-                class="veh-img"
-                id="vehImg"
-                src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
-                alt="Mazda 3 Sedan"
-              />
-              <div class="veh-meta">
-                <h4 class="veh-name" id="vehName">Mazda 3 (Standard)</h4>
-                <p class="veh-tags mini" id="vehTags">
-                  Auto • Petrol • 5 seats
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <!-- Locations -->
-          <!-- Quick location/date/duration strip -->
-          <div class="form-card kv-strip">
-            <div class="kv">
-              <i class="fa-solid fa-location-dot kv-ico" aria-hidden="true"></i>
-              <div class="kv-text">
-                <span class="kv-label">Location</span>
-                <!-- Styled select looks like text -->
-                <label class="kv-value selectlike">
-                  <select
-                    id="pickup-loc"
-                    aria-label="Pick-up location"
-                  ></select>
-                </label>
-              </div>
-            </div>
-
-            <div class="kv">
-              <i class="fa-regular fa-calendar kv-ico" aria-hidden="true"></i>
-              <div class="kv-text">
-                <span class="kv-label">Date &amp; Time</span>
-                <!-- Large inline datetime (defaults to now via JS) -->
-                <input
-                  id="pickup-dt"
-                  type="datetime-local"
-                  class="kv-value inputlike"
-                />
-              </div>
-            </div>
-
-            <div class="kv">
-              <i class="fa-regular fa-clock kv-ico" aria-hidden="true"></i>
-              <div class="kv-text">
-                <span class="kv-label">Duration</span>
-                <label class="kv-value selectlike">
-                  <select id="rental-duration" aria-label="Rental duration">
-                    <option value="2h">2 hr</option>
-                    <option value="4h">4 hr</option>
-                    <option value="6h">6 hr</option>
-                    <option value="12h">12 hr</option>
-                    <option value="1d" selected>1 day</option>
-                    <option value="2d">2 days</option>
-                    <option value="3d">3 days</option>
-                    <option value="7d">7 days</option>
-                    <option value="custom">Custom…</option>
-                  </select>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Drop-off & auto return -->
-          <div class="form-card">
-            <div class="kv-grid-2">
-              <div class="kv">
-                <i
-                  class="fa-solid fa-location-dot kv-ico"
-                  aria-hidden="true"
-                ></i>
-                <div class="kv-text">
-                  <span class="kv-label">Drop-off location</span>
-                  <label class="kv-value selectlike">
+              <div class="item soft">
+                <i class="fa-solid fa-location-dot ico" aria-hidden="true"></i>
+                <div class="text">
+                  <span class="label">Drop-off location</span>
+                  <label class="value select-inline">
                     <select
                       id="dropoff-loc"
                       aria-label="Drop-off location"
@@ -169,159 +90,295 @@
                   </label>
                 </div>
               </div>
+            </div>
 
-              <div class="kv">
-                <i class="fa-regular fa-calendar kv-ico" aria-hidden="true"></i>
-                <div class="kv-text">
-                  <span class="kv-label">Return date &amp; time</span>
-                  <input
-                    id="return-dt"
-                    type="datetime-local"
-                    class="kv-value inputlike"
-                    readonly
-                  />
+            <!-- Date & Time -->
+            <div class="card grid-2">
+              <div class="item">
+                <i class="fa-regular fa-calendar ico" aria-hidden="true"></i>
+                <div class="text">
+                  <span class="label">Date &amp; Time</span>
+                  <div class="date-time-row">
+                    <input
+                      id="pickup-date"
+                      type="date"
+                      class="value input-inline"
+                      aria-label="Pick-up date"
+                    />
+                    <label class="value select-inline">
+                      <select
+                        id="pickup-time"
+                        aria-label="Pick-up time"
+                      ></select>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <i class="fa-regular fa-calendar ico" aria-hidden="true"></i>
+                <div class="text">
+                  <span class="label">Return date &amp; time</span>
+                  <div class="date-time-row">
+                    <input
+                      id="return-date"
+                      type="date"
+                      class="value input-inline"
+                      aria-label="Return date"
+                    />
+                    <label class="value select-inline">
+                      <select
+                        id="return-time"
+                        aria-label="Return time"
+                      ></select>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <p class="mini muted" style="margin-top: 0.5rem">
-              You can return to a different location if allowed by the car’s
-              zone.
-            </p>
+            <!-- Selected Vehicle + Plan -->
+            <div class="form-row">
+              <div class="form-card vehicle">
+                <div class="form-head">
+                  <h3>Selected vehicle</h3>
+                  <a href="./carList.html" class="mini-link">Change</a>
+                </div>
+                <div class="vehicle-card">
+                  <img
+                    class="veh-img"
+                    id="vehImg"
+                    src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mazda3_SE-L_Lux_%282021%29.jpg"
+                    alt="Mazda 3 Sedan"
+                  />
+                  <div class="veh-meta">
+                    <h4 class="veh-name" id="vehName">Mazda 3 (Standard)</h4>
+                    <p class="veh-tags mini" id="vehTags">
+                      Auto • Petrol • 5 seats
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-card plan">
+                <div class="form-head">
+                  <h3>Plan</h3>
+                </div>
+                <div class="segmented" role="tablist" aria-label="Plan">
+                  <button
+                    class="seg-btn active"
+                    type="button"
+                    aria-selected="true"
+                    data-plan="hourly"
+                  >
+                    Hourly
+                  </button>
+                  <button
+                    class="seg-btn"
+                    type="button"
+                    aria-selected="false"
+                    data-plan="fullday"
+                  >
+                    Full-day
+                  </button>
+                  <span class="seg-indicator" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add-ons -->
+            <div class="form-card">
+              <h3>Add-ons</h3>
+              <div class="checks">
+                <label class="check">
+                  <input
+                    type="checkbox"
+                    data-addon="childseat"
+                    data-price="6"
+                  />
+                  <span>Child seat</span><em class="mini">$6</em>
+                </label>
+                <label class="check">
+                  <input type="checkbox" data-addon="booster" data-price="4" />
+                  <span>Booster seat</span><em class="mini">$4</em>
+                </label>
+                <label class="check">
+                  <input type="checkbox" data-addon="bike" data-price="5" />
+                  <span>Bike rack</span><em class="mini">$5</em>
+                </label>
+              </div>
+            </div>
+
+            <!-- Protection -->
+            <div class="form-card">
+              <h3>Protection</h3>
+              <div class="radios">
+                <label class="radio">
+                  <input
+                    type="radio"
+                    name="cover"
+                    value="basic"
+                    checked
+                    data-price="0"
+                  />
+                  <span>Basic</span><em class="mini">Included</em>
+                </label>
+                <label class="radio">
+                  <input
+                    type="radio"
+                    name="cover"
+                    value="plus"
+                    data-price="8"
+                  />
+                  <span>Plus</span><em class="mini">+$8 (reduced excess)</em>
+                </label>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-card">
+              <label class="field">
+                <span>Notes for host (optional)</span>
+                <textarea
+                  rows="3"
+                  placeholder="Anything we should know?"
+                ></textarea>
+              </label>
+            </div>
+
+            <!-- Continue button -->
+            <div class="form-nav">
+              <button class="btn block next-step">Continue</button>
+            </div>
           </div>
 
-          <!-- Your existing summary column stays as is -->
+          <!-- STEP 2: DRIVER -->
+          <div class="form-step" data-step="2">
+            <div class="form-card">
+              <h3>Driver Verification</h3>
+              <div class="driver-options">
+                <button
+                  type="button"
+                  class="btn block driver-btn"
+                  id="singpass"
+                >
+                  <i class="fa-solid fa-id-card"></i> Sign in with Singpass
+                </button>
+                <button
+                  type="button"
+                  class="reserve-btn outline block driver-btn"
+                  id="manual"
+                >
+                  <i class="fa-solid fa-pen"></i> Enter Manually
+                </button>
+              </div>
+            </div>
+            <div class="form-nav">
+              <button class="btn outline back-step">Back</button>
+              <button class="btn block next-step">Continue</button>
+            </div>
 
-          <!-- <div class="form-card">
-            <h3>Pick-up & drop-off</h3>
-            <div class="grid-2">
+            <!-- Minimal manual driver form (hidden by default) -->
+            <div class="driver-manual" id="driverManual" hidden>
+              <div class="grid-2">
+                <label class="field"
+                  ><span>Full name</span
+                  ><input id="drvName" type="text" placeholder="e.g., Jane Tan"
+                /></label>
+                <label class="field"
+                  ><span>NRIC/FIN</span
+                  ><input id="drvId" type="text" placeholder="S1234567A"
+                /></label>
+              </div>
+              <div class="grid-2">
+                <label class="field"
+                  ><span>Date of birth</span><input id="drvDob" type="date"
+                /></label>
+                <label class="field"
+                  ><span>License No.</span
+                  ><input id="drvLic" type="text" placeholder="F1234567Z"
+                /></label>
+              </div>
+              <div class="grid-2">
+                <label class="field"
+                  ><span>Phone</span
+                  ><input id="drvPhone" type="tel" placeholder="+65 8123 4567"
+                /></label>
+                <label class="field"
+                  ><span>Email</span
+                  ><input
+                    id="drvEmail"
+                    type="email"
+                    placeholder="you@email.com"
+                /></label>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: PAYMENT -->
+          <div class="form-step" data-step="3">
+            <div class="form-card">
+              <h3>Payment</h3>
               <label class="field">
-                <span>Pick-up location</span>
+                <span>Cardholder Name</span>
                 <input
                   type="text"
-                  placeholder="Search carpark or street"
-                  autocomplete="off"
-                  inputmode="search"
+                  id="cardName"
+                  placeholder="John Doe"
+                  required
                 />
               </label>
+
+              <!-- Card type dropdown (added) -->
               <label class="field">
-                <span>Drop-off location</span>
+                <span>Card type</span>
+                <select id="cardType" required>
+                  <option value="">Select card type…</option>
+                  <option value="visa">Visa</option>
+                  <option value="mastercard">Mastercard</option>
+                  <option value="amex">American Express</option>
+                  <option value="discover">Discover</option>
+                  <option value="jcb">JCB</option>
+                  <option value="unionpay">UnionPay</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span>Card Number</span>
                 <input
                   type="text"
-                  placeholder="Same as pick-up"
-                  autocomplete="off"
-                  inputmode="search"
+                  id="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  required
                 />
               </label>
+              <div class="grid-2">
+                <label class="field">
+                  <span>Expiry Date</span>
+                  <input type="text" id="expiry" placeholder="MM/YY" required />
+                </label>
+                <label class="field">
+                  <span>CVV</span>
+                  <input type="text" id="cvv" placeholder="123" required />
+                </label>
+              </div>
             </div>
-            <div class="grid-2">
-              <label class="field">
-                <span>Pick-up date & time</span>
-                <input type="datetime-local" />
-              </label>
-              <label class="field">
-                <span>Return date & time</span>
-                <input type="datetime-local" />
-              </label>
+            <div class="form-nav">
+              <button class="btn outline back-step">Back</button>
+              <button class="btn block pay-btn">Pay Now</button>
             </div>
-            <p class="mini muted">
-              You can return to a different location if allowed by the car’s
-              zone.
-            </p>
-          </div> -->
-
-          <!-- Plans (Hourly / Full-day) -->
-          <div class="form-card">
-            <h3>Plan</h3>
-
-            <div class="segmented" role="tablist" aria-label="Plan">
-              <button
-                class="seg-btn active"
-                type="button"
-                aria-selected="true"
-                data-plan="hourly"
-              >
-                Hourly
-              </button>
-              <button
-                class="seg-btn"
-                type="button"
-                aria-selected="false"
-                data-plan="fullday"
-              >
-                Full-day
-              </button>
-              <span class="seg-indicator" aria-hidden="true"></span>
-            </div>
-          </div>
-
-          <!-- Mileage + Add-ons -->
-          <div class="form-card">
-            <h3>Add-ons</h3>
-            <div class="grid-2">
-              <label class="field">
-                <span>Mileage estimate (km)</span>
-                <input type="number" min="0" step="1" value="20" id="mileage" />
-              </label>
-              <label class="field">
-                <span>Promo code</span>
-                <input
-                  type="text"
-                  placeholder="Enter code (optional)"
-                  id="promo"
-                />
-              </label>
-            </div>
-            <div class="checks">
-              <label class="check">
-                <input type="checkbox" data-addon="childseat" data-price="6" />
-                <span>Child seat</span><em class="mini">$6</em>
-              </label>
-              <label class="check">
-                <input type="checkbox" data-addon="booster" data-price="4" />
-                <span>Booster seat</span><em class="mini">$4</em>
-              </label>
-              <label class="check">
-                <input type="checkbox" data-addon="bike" data-price="5" />
-                <span>Bike rack</span><em class="mini">$5</em>
-              </label>
-            </div>
-          </div>
-
-          <!-- Protection -->
-          <div class="form-card">
-            <h3>Protection</h3>
-            <div class="radios">
-              <label class="radio">
-                <input
-                  type="radio"
-                  name="cover"
-                  value="basic"
-                  checked
-                  data-price="0"
-                />
-                <span>Basic</span><em class="mini">Included</em>
-              </label>
-              <label class="radio">
-                <input type="radio" name="cover" value="plus" data-price="8" />
-                <span>Plus</span><em class="mini">+$8 (reduced excess)</em>
-              </label>
-            </div>
-          </div>
-
-          <!-- Notes -->
-          <div class="form-card">
-            <label class="field">
-              <span>Notes for host (optional)</span>
-              <textarea
-                rows="3"
-                placeholder="Anything we should know?"
-              ></textarea>
-            </label>
           </div>
         </form>
 
-        <!-- RIGHT: LIVE SUMMARY -->
+        <!-- RIGHT: SUMMARY -->
+        <!-- <aside class="summary-col">
+          <div class="summary-card" id="price-summary">
+            <h3>Price estimate</h3>
+            <div class="sum-row">
+              <span>Total (est.)</span><strong id="sum-total">$120.00</strong>
+            </div>
+          </div>
+        </aside> -->
         <aside class="summary-col">
           <div class="summary-card" id="price-summary">
             <h3>Price estimate</h3>
@@ -329,18 +386,18 @@
             <div class="sum-row">
               <span>Time charge</span><strong id="sum-time">$0.00</strong>
             </div>
-            <div class="sum-row">
+            <!-- <div class="sum-row">
               <span>Mileage</span><strong id="sum-mileage">$0.00</strong>
-            </div>
+            </div> -->
             <div class="sum-row">
               <span>Add-ons</span><strong id="sum-addons">$0.00</strong>
             </div>
             <div class="sum-row">
               <span>Protection</span><strong id="sum-cover">$0.00</strong>
             </div>
-            <div class="sum-row">
+            <!-- <div class="sum-row">
               <span>Promo</span><strong id="sum-promo">–$0.00</strong>
-            </div>
+            </div> -->
 
             <hr />
             <div class="sum-row total">
@@ -349,8 +406,6 @@
             <p class="mini muted">
               Inclusive of insurance and taxes unless noted.
             </p>
-
-            <a href="#" class="btn block">Continue</a>
           </div>
         </aside>
       </section>
@@ -361,7 +416,7 @@
       <div class="footer-grid">
         <div>
           <h4>Contact</h4>
-          <p>hello@azoom.example<br />+65 6000 0000</p>
+          <p>azoomrental@gmail.com<br />+65 9199 5560</p>
         </div>
         <div>
           <h4>Links</h4>
@@ -381,5 +436,10 @@
         <a href="./faq.html">FAQ</a>
       </div>
     </footer>
+
+    <div id="overlay" hidden>
+      <div class="spinner"></div>
+      <p>Processing payment…</p>
+    </div>
   </body>
 </html>

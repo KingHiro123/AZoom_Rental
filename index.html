@@ -60,59 +60,9 @@
           <h1>Rent the right car, right now</h1>
           <p>Fast. Affordable. Anywhere in the city.</p>
 
-          <div class="hero-actions">
-            <p class="hint">Pick your reservation dates!</p>
-            <div class="form-card kv-strip" id="reserve-form">
-              <div class="kv">
-                <i
-                  class="fa-solid fa-location-dot kv-ico"
-                  aria-hidden="true"
-                ></i>
-                <div class="kv-text">
-                  <span class="kv-label">Location</span>
-                  <!-- Styled select looks like text -->
-                  <label class="kv-value selectlike">
-                    <select
-                      id="pickup-loc"
-                      aria-label="Pick-up location"
-                    ></select>
-                  </label>
-                </div>
-              </div>
-
-              <div class="kv">
-                <i class="fa-regular fa-calendar kv-ico" aria-hidden="true"></i>
-                <div class="kv-text">
-                  <span class="kv-label">Date &amp; Time</span>
-                  <!-- Large inline datetime (defaults to now via JS) -->
-                  <input
-                    id="pickup-dt"
-                    type="datetime-local"
-                    class="kv-value inputlike"
-                  />
-                </div>
-              </div>
-
-              <div class="kv">
-                <i class="fa-regular fa-clock kv-ico" aria-hidden="true"></i>
-                <div class="kv-text">
-                  <span class="kv-label">Duration</span>
-                  <label class="kv-value selectlike">
-                    <select id="rental-duration" aria-label="Rental duration">
-                      <option value="2h">2 hr</option>
-                      <option value="4h">4 hr</option>
-                      <option value="6h">6 hr</option>
-                      <option value="12h">12 hr</option>
-                      <option value="1d" selected>1 day</option>
-                      <option value="2d">2 days</option>
-                      <option value="3d">3 days</option>
-                      <option value="7d">7 days</option>
-                      <option value="custom">Custom…</option>
-                    </select>
-                  </label>
-                </div>
-              </div>
-            </div>
+          <div class="hero-buttons">
+            <a class="btn" href="./carList.html">Reserve now</a>
+            <a class="btn" href="./index.html#howto">How it works</a>
           </div>
         </div>
 
@@ -185,7 +135,7 @@
               </ul>
 
               <!-- Keep if you still want an action; otherwise remove -->
-              <a class="link-btn" href="./carList.html">Rent now</a>
+              <a class="link-btn" href="./reserve.html">Rent now</a>
             </div>
 
             <img
@@ -332,8 +282,6 @@
           </div>
         </div>
       </section>
-
-      <section class="locations">???? I guess locations will be here?</section>
     </main>
 
     <!-- FOOTER -->

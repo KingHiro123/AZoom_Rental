@@ -2,16 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up – AZoom Rental</title>
+
     <link rel="stylesheet" href="./css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+
     <script src="./js/script.js" defer></script>
   </head>
+
   <body>
+    <!-- HEADER -->
     <header class="header" id="top">
       <div class="header-wrap">
         <a href="./index.html">
@@ -19,7 +23,6 @@
             class="logo"
             src="./img/azoom-rental-high-resolution-logo-transparent.png"
             alt="AZoom Rental Logo"
-            href="./index.html"
           />
         </a>
 
@@ -40,20 +43,29 @@
     </header>
 
     <!-- MAIN -->
-    <!-- MAIN -->
     <main class="login-page">
-      <!-- Save the username/password in local storage  -->
+      <section class="login-card" aria-labelledby="signupTitle">
+        <h1 id="signupTitle" class="xl">Create your account</h1>
+        <p class="lead">Sign up to manage your bookings and profile.</p>
 
-      <section class="login-card">
-        <h1 class="xl">Login</h1>
-        <p class="lead">Access your AZoom account to manage bookings.</p>
+        <form id="signupForm" class="login-form" novalidate>
+          <label class="field">
+            <span>Full name</span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g., Jane Tan"
+            />
+          </label>
 
-        <form id="loginForm" class="login-form">
           <label class="field">
             <span>Email</span>
             <input
               type="email"
               id="email"
+              name="email"
               required
               placeholder="you@example.com"
             />
@@ -64,16 +76,30 @@
             <input
               type="password"
               id="password"
+              name="password"
+              minlength="8"
               required
-              placeholder="••••••••"
+              placeholder="At least 8 characters"
             />
           </label>
 
-          <button type="submit" class="btn block">Login</button>
+          <label class="field">
+            <span>Confirm password</span>
+            <input
+              type="password"
+              id="confirm"
+              name="confirm"
+              minlength="8"
+              required
+              placeholder="Re-enter your password"
+            />
+          </label>
+
+          <button type="submit" class="btn block">Create account</button>
         </form>
 
         <p class="mini muted">
-          Don’t have an account? <a href="./signup.html">Sign up</a>
+          Already have an account? <a href="./login.html">Log in</a>
         </p>
       </section>
     </main>
@@ -89,8 +115,8 @@
           <h4>Links</h4>
           <p>
             <a href="./carList.html">Cars</a> ·
-            <a href="#howto">How it works</a> ·
-            <a href="#reviews">Reviews</a>
+            <a href="./index.html#howto">How it works</a> ·
+            <a href="./index.html#reviews">Reviews</a>
           </p>
         </div>
         <div>
